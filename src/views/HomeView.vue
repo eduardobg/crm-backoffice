@@ -56,7 +56,7 @@ export default {
       .catch(err => {
         const { msg } = err.response.data
         if(msg !== "Acceso concedido"){
-          console.log(msg)
+          //console.log(msg)
           this.error = true
           this.mensaje = msg
         }
