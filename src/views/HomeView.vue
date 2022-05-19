@@ -9,7 +9,7 @@
         <!-- Formulario Login -->
         <form v-on:submit.prevent="login">
           <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario" v-model="usuario">
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="Contraseña" v-model="contraseña">
+          <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" v-model="contraseña">
           <input type="submit" class="fadeIn fourth" value="Ingresar">
         </form>
         <!-- Recordar contraseña -->
@@ -50,7 +50,7 @@ export default {
       .then(data => {
         const { msg } = data.data
         if(msg === "Acceso concedido"){
-          console.log("Todo ok")
+          this.$router.push('dashboardview')
         }
       })
       .catch(err => {
@@ -189,7 +189,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text],input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -210,12 +210,12 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
   background-color: #fff;
   border-bottom: 2px solid #3FB85F;
 }
 
-input[type=text]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
 
