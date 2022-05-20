@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '../views/DashboardView.vue'
+import EditarView from '../views/EditarView.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/dashboardview',
     name: 'DashboardView',
     component: DashboardView
+  },
+  {
+    path: '/editarview/:id',
+    name: 'EditarView',
+    component: EditarView
   }
 ]
 
