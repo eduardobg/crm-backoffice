@@ -2,7 +2,9 @@
   <div>
       <HeaderComp />
       
-      <div class="container">
+      <div class="container izquierda">
+        <button class="btn btn-primary" v-on:click="agregar()">Nuevo Cliente</button>
+        <br><br>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -53,19 +55,22 @@ export default {
     methods: {
       editar(id){
         this.$router.push('/editarview/' + id)
+      },
+      agregar(){
+        this.$router.push('/agregarview')
       }
     },
     mounted: function(){
       let direccion = "https://crm-utp.herokuapp.com/api/customers"
       axios.get(direccion).then(data => {
-        console.log(data.data.customers)
-        this.Listcustomers = data.data.customers
-        
+        this.Listcustomers = data.data.customers    
       })
     }
 }
 </script>
 
 <style scoped>
-
+  .izquierda{
+        text-align: left;
+    }
 </style>

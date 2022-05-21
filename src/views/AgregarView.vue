@@ -1,8 +1,8 @@
 <template>
   <div>
-    <HeaderComp />
+      <HeaderComp />
         <div class="container">
-            <form action="" class="form-horizontal left">
+          <form action="" class="form-horizontal left">
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Nombre</label> 
@@ -36,29 +36,25 @@
                     
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="text" class="form-control" name="createat" id="createat" v-model="form.createAt" disabled>
+                        <input type="text" class="form-control" name="createat" id="createat" v-model="form.createAt">
                     </div>
                     <div class="col-xl-4">
                         <label>Email</label> 
-                        <input type="text" class="form-control" name="email" id="email" v-model="form.email" disabled>
+                        <input type="text" class="form-control" name="email" id="email" v-model="form.email">
                     </div>
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label> 
-                        <input type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[0]._id" disabled>
+                        <input type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[0]._id">
                     </div>
                 </div>
             </form>
             <br>
-            <div class="form-group">
-                <button type="button" class="btn btn-primary" v-on:click="editar()">Editar</button>
-                <button type="button" class="btn btn-danger margen" v-on:click="suspender()">Suspender</button>
-                <button type="button" class="btn btn-primary" v-on:click="activar()">Activar</button>
-                <button type="button" class="btn btn-dark margen" v-on:click="salir()">Salir</button>
-            </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" v-on:click="guardar()">Guardar</button>
+                    <button type="button" class="btn btn-dark margen" v-on:click="salir()">Salir</button>
+                </div>
         </div>
-        
-        
-    <FooterComp />
+      <FooterComp />
   </div>
 </template>
 
@@ -68,15 +64,10 @@ import FooterComp from '@/components/FooterComp.vue'
 import axios from 'axios'
 
 export default {
-    name: "EditarView",
-    components: {
-      HeaderComp,
-      FooterComp
-    },
+    name: "AgregarView",
     data: function(){
         return {          
             form:{
-                "_id": "",
                 "name": "",
                 "lastName": "",
                 "businessName":"",
@@ -90,62 +81,27 @@ export default {
                         "_id": ""
                     }
                 ],
-                "state": ""
             }
         }
     },
-    methods:{
-        editar(){
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id, this.form)
+    components:{
+        HeaderComp,
+        FooterComp
+    },
+    methods: {
+        guardar(){
+            axios.post("https://crm-utp.herokuapp.com/api/customers",this.form)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
-                console.log(err)
-            })
+                console.log(err)        
+            }) 
+            this.$router.push("/dashboardview")
         },
         salir(){
             this.$router.push("/dashboardview")
         },
-        suspender(){
-            this.state = "Suspendido"
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        },
-        activar(){                      
-            this.state = "Activo"
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
-    },
-    mounted: function(){
-        this.form._id = this.$route.params.id
-        axios.get("https://crm-utp.herokuapp.com/api/customers/" + this.form._id)
-        .then(datos => {   
-            this.form.name = datos.data.customer.name
-            this.form.lastName = datos.data.customer.lastName
-            this.form.businessName = datos.data.customer.businessName
-            this.form.ruc_dni = datos.data.customer.ruc_dni
-            this.form.createAt = datos.data.customer.createAt
-            this.form.address = datos.data.customer.address
-            this.form.phone = datos.data.customer.phone
-            this.form.email = datos.data.customer.email
-            this.form.seller[0]._id = datos.data.customer.seller[0]._id
-            this.form.state = datos.data.customer.state
-        })
-        .catch(err => {
-            console.log(err)
-        })
     }
 }
 </script>
