@@ -8,6 +8,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 
 Vue.config.productionTip = false
+Vue.prototype.$http = axios
+axios.defaults.baseURL = 'https://crm-utp.herokuapp.com/api'
+
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueAxios, axios)

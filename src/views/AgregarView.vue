@@ -1,6 +1,6 @@
 <template>
   <div>
-      <HeaderComp />
+      <SidebarMenuAkahon />
         <div class="container">
           <form action="" class="form-horizontal left">
                 <div class="row">
@@ -54,14 +54,11 @@
                     <button type="button" class="btn btn-dark margen" v-on:click="salir()">Salir</button>
                 </div>
         </div>
-      <FooterComp />
   </div>
 </template>
 
 <script>
-import HeaderComp from '@/components/HeaderComp.vue'
-import FooterComp from '@/components/FooterComp.vue'
-import axios from 'axios'
+import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
     name: "AgregarView",
@@ -85,12 +82,12 @@ export default {
         }
     },
     components:{
-        HeaderComp,
-        FooterComp
+        SidebarMenuAkahon
     },
     methods: {
         guardar(){
-            axios.post("https://crm-utp.herokuapp.com/api/customers",this.form)
+            this.$http
+            .post("/customers",this.form)
             .then(data => {
                 console.log(data)
             })

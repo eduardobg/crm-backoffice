@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderComp />
+    <SidebarMenuAkahon />
         <div class="container">
             <form action="" class="form-horizontal left">
                 <div class="row">
@@ -57,21 +57,16 @@
             </div>
         </div>
         
-        
-    <FooterComp />
   </div>
 </template>
 
 <script>
-import HeaderComp from '@/components/HeaderComp.vue'
-import FooterComp from '@/components/FooterComp.vue'
-import axios from 'axios'
+import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
     name: "EditarView",
     components: {
-      HeaderComp,
-      FooterComp
+      SidebarMenuAkahon
     },
     data: function(){
         return {          
@@ -96,7 +91,8 @@ export default {
     },
     methods:{
         editar(){
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id, this.form)
+            this.$http
+            .put("/customers/" + this.form._id, this.form)
             .then(data => {
                 console.log(data)
             })
@@ -109,7 +105,8 @@ export default {
         },
         suspender(){
             this.state = "Suspendido"
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id + "/" + this.state)
+            this.$http
+            .put("/customers/" + this.form._id + "/" + this.state)
             .then(data => {
                 console.log(data)
             })
@@ -119,7 +116,8 @@ export default {
         },
         activar(){                      
             this.state = "Activo"
-            axios.put("https://crm-utp.herokuapp.com/api/customers/" + this.form._id + "/" + this.state)
+            this.$http
+            .put("/customers/" + this.form._id + "/" + this.state)
             .then(data => {
                 console.log(data)
             })
@@ -130,7 +128,8 @@ export default {
     },
     mounted: function(){
         this.form._id = this.$route.params.id
-        axios.get("https://crm-utp.herokuapp.com/api/customers/" + this.form._id)
+        this.$http
+        .get("/customers/" + this.form._id)
         .then(datos => {   
             this.form.name = datos.data.customer.name
             this.form.lastName = datos.data.customer.lastName

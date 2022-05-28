@@ -1,8 +1,10 @@
 <template>
   <div>
-      <HeaderComp />
+      <SidebarMenuAkahon />
       
       <div class="container izquierda">
+        <h1>Lista de clientes</h1>
+        <br>
         <button class="btn btn-primary" v-on:click="agregar()">Nuevo Cliente</button>
         <br><br>
         <table class="table table-hover">
@@ -33,14 +35,12 @@
         </table>
       </div>
 
-      <FooterComp />
   </div>
 </template>
 
 <script>
-import HeaderComp from '@/components/HeaderComp.vue'
-import FooterComp from '@/components/FooterComp.vue'
-import axios from 'axios'
+import SidebarMenuAkahon from '@/components/SidebarComp.vue'
+
 export default {
     name: "DashboardView",
     data(){
@@ -49,8 +49,7 @@ export default {
       }
     },
     components: {
-      HeaderComp,
-      FooterComp
+      SidebarMenuAkahon
     },
     methods: {
       editar(id){
@@ -61,8 +60,8 @@ export default {
       }
     },
     mounted: function(){
-      let direccion = "https://crm-utp.herokuapp.com/api/customers"
-      axios.get(direccion).then(data => {
+      this.$http
+      .get("/customers").then(data => {
         this.Listcustomers = data.data.customers    
       })
     }
@@ -73,4 +72,8 @@ export default {
   .izquierda{
         text-align: left;
     }
+  .container{
+        margin: 30px 10px 10px 10px;
+        /*background-color: #3FB85F;*/
+  }
 </style>
