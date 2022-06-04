@@ -10,40 +10,43 @@
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Nombre</label> 
-                        <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ej. Jeremy" v-model="form.name">
                     </div>
                     <div class="col-xl-4">
                         <label>Apellido</label> 
-                        <input type="text" class="form-control" name="apellido" id="apellido" v-model="form.lastName">
-                    </div>
-                    <div class="col-xl-4">
-                        <label>Contraseña</label>  
-                        <input type="text" class="form-control" name="contraseña" id="contraseña" v-model="form.password">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4">
-                        <label>Rol empresarial</label> 
-                        <input type="text" class="form-control" name="rol" id="rol" v-model="form.role">
+                        <input type="text" class="form-control" name="apellido" id="apellido" placeholder="ej. Villafuerte" v-model="form.lastName">
                     </div>
                     <div class="col-xl-4">
                         <label>Telefono</label> 
-                        <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
+                        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987876765" v-model="form.phone">
+                    </div>                
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <label>Rol empresarial</label> 
+                        <input type="text" class="form-control" name="rol" id="rol" placeholder="ej. vendedor" v-model="form.role">
+                    </div>
+                    <div class="col-xl-4">
+                        <label>Contraseña</label>  
+                        <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="ej. 123456" v-model="form.password">
                     </div>
                     <div class="col-xl-4">
                         <label>Estado</label> 
-                        <input type="text" class="form-control" name="estado" id="estado" v-model="form.state">
+                        <select type="text" class="form-control" name="estado" id="estado" placeholder="ej. Activo o Suspendido" v-model="form.state">
+                            <option selected>Activo</option>
+                            <option>Suspendido</option>
+                        </select>
                     </div>
-                </div>
-                <hr>
+                </div>               
                 <div class="row">                    
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="text" class="form-control" name="createat" id="createat" v-model="form.createAt">
+                        <input type="text" class="form-control" name="createat" id="createat" placeholder="ej. 2022-05-23" v-model="form.createAt">
                     </div>
                     <div class="col-xl-4">
                         <label>Email</label> 
-                        <input type="text" class="form-control" name="email" id="email" v-model="form.email">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="ej. usuario@gmail.com" v-model="form.email">
                     </div>
                     <div class="col-xl-4">
                         <label>Supervisor asignado</label>                    

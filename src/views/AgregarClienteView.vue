@@ -10,29 +10,29 @@
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Nombre</label> 
-                        <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
+                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ej. Jeremy" v-model="form.name">
                     </div>
                     <div class="col-xl-4">
                         <label>Apellido</label> 
-                        <input type="text" class="form-control" name="apellido" id="apellido" v-model="form.lastName">
+                        <input type="text" class="form-control" name="apellido" id="apellido" placeholder="ej. Villafuerte" v-model="form.lastName">
                     </div>
                     <div class="col-xl-4">
                         <label>Negocio</label>  
-                        <input type="text" class="form-control" name="negocio" id="negocio" v-model="form.businessName">
+                        <input type="text" class="form-control" name="negocio" id="negocio" placeholder="ej. Bodega JVC" v-model="form.businessName">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-4">
                         <label>RUC / DNI</label> 
-                        <input type="text" class="form-control" name="rucdni" id="rucdni" v-model="form.ruc_dni">
+                        <input type="text" class="form-control" name="rucdni" id="rucdni" placeholder="ej. 78866543" v-model="form.ruc_dni">
                     </div>
                     <div class="col-xl-4">
                         <label>Telefono</label> 
-                        <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
+                        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987876765" v-model="form.phone">
                     </div>
                     <div class="col-xl-4">
                         <label>Direccion</label> 
-                        <input type="text" class="form-control" name="direccion" id="direccion" v-model="form.address">
+                        <input type="text" class="form-control" name="direccion" id="direccion" placeholder="ej. Avenida Los Duraznos" v-model="form.address">
                     </div>
                 </div>
                 <hr>
@@ -40,11 +40,11 @@
                     
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="text" class="form-control" name="createat" id="createat" v-model="form.createAt">
+                        <input type="text" class="form-control" name="createat" id="createat" placeholder="ej. 2022-05-23" v-model="form.createAt">
                     </div>
                     <div class="col-xl-4">
                         <label>Email</label> 
-                        <input type="text" class="form-control" name="email" id="email" v-model="form.email">
+                        <input type="text" class="form-control" name="email" id="email" placeholder="ej. usuario@gmail.com" v-model="form.email">
                     </div>
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label> 

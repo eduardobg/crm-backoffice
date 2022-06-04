@@ -17,25 +17,25 @@
                         <input type="text" class="form-control" name="apellido" id="apellido" v-model="form.lastName">
                     </div>
                     <div class="col-xl-4">
-                        <label>Contraseña</label>  
-                        <input type="text" class="form-control" name="contraseña" id="contraseña" v-model="form.password">
-                    </div>
+                        <label>Telefono</label> 
+                        <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
+                    </div>                  
                 </div>
+                <hr>                
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Rol empresarial</label> 
                         <input type="text" class="form-control" name="rol" id="rol" v-model="form.role" disabled>
                     </div>
                     <div class="col-xl-4">
-                        <label>Telefono</label> 
-                        <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
+                        <label>Contraseña</label>  
+                        <input type="text" class="form-control" name="contraseña" id="contraseña" v-model="form.password" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Estado</label> 
                         <input type="text" class="form-control" name="estado" id="estado" v-model="form.state" disabled>
                     </div>
                 </div>
-                <hr>
                 <div class="row">                    
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
