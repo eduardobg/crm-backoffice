@@ -48,7 +48,10 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label> 
-                        <input type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[0]._id">
+                        <select type="text" class="form-control" name="vendedor" id="vendedor">
+                            <option selected>{{ form.seller[0]._id="62813299d73ba5a57f344ccd" }}</option>
+                            <option>{{ "..." }}</option>
+                        </select>
                     </div>
                 </div>
             </form>
@@ -67,7 +70,7 @@
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
-    name: "AgregarView",
+    name: "AgregarClienteView",
     data: function(){
         return {          
             form:{
@@ -182,7 +185,7 @@ export default {
         transform: scale(0.95);
     }
 
-    input[type=text],input[type=password] {
+    input[type=text], select[type=text] {
         background-color: #f6f6f6;
         border: none;
         color: #0d0d0d;
@@ -203,12 +206,12 @@ export default {
         border-radius: 5px 5px 5px 5px;
     }
 
-    input[type=text]:focus, input[type=password]:focus {
+    input[type=text]:focus, select[type=text]:focus {
         background-color: #fff;
         border-bottom: 2px solid #3FB85F;
     }
 
-    input[type=text]:placeholder, input[type=password]:placeholder {
+    input[type=text]:placeholder, select[type=text]:placeholder {
         color: #cccccc;
     }
 </style>

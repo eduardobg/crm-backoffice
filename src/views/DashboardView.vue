@@ -61,13 +61,13 @@ export default {
     },
     methods: {
       editar(id){
-        this.$router.push('/editarview/' + id)
+        this.$router.push('/editarclienteview/' + id)
       },
       agregar(){
-        this.$router.push('/agregarview')
+        this.$router.push('/agregarclienteview')
       },
       buscar(){
-        this.$router.push('/editarview/' + this.SearchId)
+        this.$router.push('/editarclienteview/' + this.SearchId)
       }
     },
     mounted: function(){

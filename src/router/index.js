@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DashboardView from '../views/DashboardView.vue'
-import EditarView from '../views/EditarView.vue'
-import AgregarView from '../views/AgregarView.vue'
+import EditarView from '../views/EditarClienteView.vue'
+import AgregarView from '../views/AgregarClienteView.vue'
 
 Vue.use(VueRouter)
 
@@ -19,13 +19,13 @@ const routes = [
     component: DashboardView
   },
   {
-    path: '/editarview/:id',
-    name: 'EditarView',
+    path: '/editarclienteview/:id',
+    name: 'EditarClienteView',
     component: EditarView
   },
   {
-    path: '/agregarview',
-    name: 'AgregarView',
+    path: '/agregarclienteview',
+    name: 'AgregarClienteView',
     component: AgregarView
   }
 ]
