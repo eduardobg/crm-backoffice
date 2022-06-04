@@ -153,13 +153,13 @@ export default {
             icon: 'bx-user-circle',
           },
           {
-            link: '#',
+            link: '/dashboardview',
             name: 'Clientes',
             tooltip: 'Clientes',
             icon: 'bxs-user-detail',
           },
           {
-            link: '#',
+            link: '/vendedorview',
             name: 'Vendedores',
             tooltip: 'Vendedores',
             icon: 'bx-group',

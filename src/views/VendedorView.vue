@@ -1,19 +1,19 @@
 <template>
   <div>
-      <SidebarMenuAkahon />    
+      <SidebarMenuAkahon />
       <div class="container izquierda">
         <div class="row">
-          <h1>Lista de clientes</h1>
+          <h1>Lista de vendedores</h1>
         </div>
         <br>
         <div class="row">
           <div class="col izquierda">
-            <input type="text" placeholder="Buscar cliente por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
+            <input type="text" placeholder="Buscar vendedor por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
           </div>
           <div class="col especial">
-            <input type="submit" value="Nuevo Cliente" v-on:click="agregar()">
+            <input type="submit" value="Nuevo Vendedor" v-on:click="agregar()">
            </div>
-        </div>  
+        </div>
         <div class="row">
           <table class="table table-hover">
           <thead>
@@ -21,27 +21,23 @@
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
-              <th scope="col">DNI/RUC</th>
-              <th scope="col">Negocio</th>
               <th scope="col">Telefono</th>
               <th scope="col">Email</th>
               <th scope="col">Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="customers in Listcustomers" :key="customers._id" v-on:click="editar(customers._id)">
-              <td>{{ customers._id }}</td>
-              <td>{{ customers.name }}</td>
-              <td>{{ customers.lastName }}</td>
-              <td>{{ customers.ruc_dni }}</td>
-              <td>{{ customers.businessName }}</td>
-              <td>{{ customers.phone }}</td>
-              <td>{{ customers.email }}</td>
-              <td>{{ customers.state }}</td>
+            <tr v-for="sellers in Listsellers" :key="sellers._id" v-on:click="editar(sellers._id)">
+              <td>{{ sellers._id }}</td>
+              <td>{{ sellers.name }}</td>
+              <td>{{ sellers.lastName }}</td>
+              <td>{{ sellers.phone }}</td>
+              <td>{{ sellers.email }}</td>
+              <td>{{ sellers.state }}</td>
             </tr>
           </tbody>
           </table>
-        </div>   
+        </div>  
       </div>
   </div>
 </template>
@@ -49,31 +45,31 @@
 <script>
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 export default {
-    name: "DashboardView",
+    name: "VendedorView",
     data(){
-      return {
-        Listcustomers: null,
-        SearchId: null
-      }
+        return {
+            Listsellers: null,
+            SearchId: null
+        }
     },
     components: {
       SidebarMenuAkahon
     },
     methods: {
       editar(id){
-        this.$router.push('/editarclienteview/' + id)
+        this.$router.push('/editarvendedorview/' + id)
       },
       agregar(){
-        this.$router.push('/agregarclienteview')
+        this.$router.push('/agregarvendedorview')
       },
       buscar(){
-        this.$router.push('/editarclienteview/' + this.SearchId)
+        this.$router.push('/editarvendedorview/' + this.SearchId)
       }
     },
     mounted: function(){
       this.$http
-      .get("/customers").then(data => {
-        this.Listcustomers = data.data.customers    
+      .get("/sellers").then(data => {
+        this.Listsellers = data.data.sellers    
       })
     }
 }
@@ -177,7 +173,7 @@ export default {
     margin: 5px;
     width: 95%;
     max-width: 620px;
-    min-width: 380px;
+    min-width: 360px;
     border: 2px solid #f6f6f6;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
