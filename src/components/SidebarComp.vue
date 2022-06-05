@@ -183,7 +183,7 @@ export default {
             icon: 'bx-chat',
           },
           {
-            link: '#',
+            link: '/plantillaview',
             name: 'Marketing',
             tooltip: 'Marketing',
             icon: 'bx-line-chart',

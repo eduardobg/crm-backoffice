@@ -3,41 +3,33 @@
       <SidebarMenuAkahon />
       <div class="container izquierda">
         <div class="row">
-          <h1>Lista de vendedores</h1>
+          <h1>Lista de plantillas</h1>
         </div>
         <br>
         <div class="row">
           <div class="col izquierda">
-            <input type="text" placeholder="Buscar vendedor por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
+            <input type="text" placeholder="Buscar plantilla por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
           </div>
           <div class="col especial">
-            <input type="submit" value="Nuevo Vendedor" v-on:click="agregar()">
+            <input type="submit" value="Nueva plantilla" v-on:click="agregar()">
            </div>
         </div>
-        <div class="row">
-          <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Email</th>
-              <th scope="col">Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="sellers in Listsellers" :key="sellers._id" v-on:click="editar(sellers._id)">
-              <td>{{ sellers._id }}</td>
-              <td>{{ sellers.name }}</td>
-              <td>{{ sellers.lastName }}</td>
-              <td>{{ sellers.phone }}</td>
-              <td>{{ sellers.email }}</td>
-              <td>{{ sellers.state }}</td>
-            </tr>
-          </tbody>
-          </table>
-        </div>  
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+            <div class="col">
+              Column
+            </div>
+            <div class="col">
+              Column
+            </div>
+            <div class="col">
+              Column
+            </div>
+            <div class="col">
+              Column
+            </div>
+          </div>
+        </div>
       </div>
   </div>
 </template>
@@ -45,74 +37,23 @@
 <script>
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 export default {
-    name: "VendedorView",
+    name: "PlantillaView",
     data(){
-        return {
-            Listsellers: null,
-            SearchId: null
+        return{
+
         }
     },
     components: {
       SidebarMenuAkahon
-    },
-    methods: {
-      editar(id){
-        this.$router.push('/editarvendedorview/' + id)
-      },
-      agregar(){
-        this.$router.push('/agregarvendedorview')
-      },
-      buscar(){
-        this.$router.push('/editarvendedorview/' + this.SearchId)
-      }
-    },
-    mounted: function(){
-      this.$http
-      .get("/sellers").then(data => {
-        this.Listsellers = data.data.sellers    
-      })
     }
 }
 </script>
 
 <style scoped>
-
   .container{
     width: 100%;
     max-width: 1550px;
     margin: auto;
-  }
-
-  @media screen and (max-width: 800px) {
-       table {
-           width:100%;
-           max-width: 650px;
-           margin: auto;
-       }
-       thead {
-           display: none;
-       }
-       tr:nth-of-type(2n) {
-           background-color: inherit;
-       }
-       tr td:first-child {
-           background: #f0f0f0;
-           font-weight:bold;
-           font-size:1.3em;
-       }
-       tbody td {
-           display: block;
-           text-align:center;
-       }
-       tbody td:before {
-           content: attr(data-th);
-           display: block;
-           text-align:center;
-       }
-       .col .especial {
-         text-align: left;
-       }
-       
   }
 
   .izquierda{
@@ -122,6 +63,8 @@ export default {
   .especial{
     text-align: right;
   }
+
+  
 
   h1 {
     text-align: left;
@@ -192,5 +135,4 @@ export default {
   input[type=text]:placeholder, input[type=password]:placeholder {
     color: #cccccc;
   }
-
 </style>

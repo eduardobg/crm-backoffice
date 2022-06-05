@@ -25,7 +25,7 @@
               <th scope="col">Negocio</th>
               <th scope="col">Telefono</th>
               <th scope="col">Email</th>
-              <th scope="col">Status</th>
+              <th scope="col">Estado</th>
             </tr>
           </thead>
           <tbody>

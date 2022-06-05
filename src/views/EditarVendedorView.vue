@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Contraseña</label>  
-                        <input type="text" class="form-control" name="contraseña" id="contraseña" v-model="form.password" disabled>
+                        <input type="password" class="form-control" name="contraseña" id="contraseña" v-model="form.password" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Estado</label> 
@@ -255,7 +255,7 @@ export default {
         transform: scale(0.95);
     }
 
-    input[type=text],select[type=text] {
+    input[type=text], select[type=text], input[type=password] {
         background-color: #f6f6f6;
         border: none;
         color: #0d0d0d;
@@ -276,12 +276,12 @@ export default {
         border-radius: 5px 5px 5px 5px;
     }
 
-    input[type=text]:focus, select[type=text]:focus {
+    input[type=text]:focus, select[type=text]:focus, input[type=password]:focus {
         background-color: #fff;
         border-bottom: 2px solid #3FB85F;
     }
 
-    input[type=text]:placeholder, select[type=text]:placeholder {
+    input[type=text]:placeholder, select[type=text]:placeholder, input[type=password]:placeholder {
         color: #cccccc;
     }
 </style>

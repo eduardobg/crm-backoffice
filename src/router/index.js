@@ -10,6 +10,8 @@ import VendedorView from '../views/VendedorView.vue'
 import EditarVendedorView from '../views/EditarVendedorView'
 import AgregarVendedorView from '../views/AgregarVendedorView.vue'
 
+import PlantillaView from '../views/PlantillaView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +49,11 @@ const routes = [
     path: '/agregarvendedorview',
     name: 'AgregarVendedorView',
     component: AgregarVendedorView
+  },
+  {
+    path: '/plantillaview',
+    name: 'PlantillaView',
+    component: PlantillaView
   },
 ]
 
