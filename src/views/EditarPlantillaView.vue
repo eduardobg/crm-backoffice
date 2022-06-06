@@ -3,52 +3,40 @@
       <SidebarMenuAkahon />
       <div class="container">
           <div class="row">
-                <h1>Actualizar datos del vendedor</h1>
+                <h1>Datos de la plantilla</h1>
           </div>           
           <br>
           <form action="" class="form-horizontal left">
                 <div class="row">
                     <div class="col-xl-4">
-                        <label>Nombre</label> 
-                        <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
-                    </div>
+                        <label>Titulo</label> 
+                        <input type="text" class="form-control" name="titulo" id="titulo" v-model="form.title">
+                    </div>  
                     <div class="col-xl-4">
-                        <label>Apellido</label> 
-                        <input type="text" class="form-control" name="apellido" id="apellido" v-model="form.lastName">
-                    </div>
-                    <div class="col-xl-4">
-                        <label>Telefono</label> 
-                        <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
-                    </div>                  
+                        <label>Prioridad</label> 
+                        <input type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
+                    </div>               
                 </div>
-                <hr>                
                 <div class="row">
-                    <div class="col-xl-4">
-                        <label>Rol empresarial</label> 
-                        <input type="text" class="form-control" name="rol" id="rol" v-model="form.role" disabled>
-                    </div>
-                    <div class="col-xl-4">
-                        <label>Contraseña</label>  
-                        <input type="password" class="form-control" name="contraseña" id="contraseña" v-model="form.password" disabled>
-                    </div>
-                    <div class="col-xl-4">
-                        <label>Estado</label> 
-                        <input type="text" class="form-control" name="estado" id="estado" v-model="form.state" disabled>
-                    </div>
+                    <div class="col-xl-9">
+                        <label>Mensaje</label> 
+                        <textarea class="form-control" name="mensaje" id="mensaje" v-model="form.message"></textarea>
+                    </div>               
                 </div>
+                <hr>
                 <div class="row">                    
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
                         <input type="date" class="form-control" name="createat" id="createat" v-model="form.createAt" disabled>
                     </div>
                     <div class="col-xl-4">
-                        <label>Email</label> 
-                        <input type="text" class="form-control" name="email" id="email" v-model="form.email" disabled>
+                        <label>Autor de campaña</label>                    
+                        <input type="text" class="form-control" name="autor" id="autor" v-model="form.author[0]._id" disabled>
                     </div>
                     <div class="col-xl-4">
-                        <label>Supervisor asignado</label>                    
-                        <select type="text" class="form-control" name="supervisor" id="supervisor">
-                            <option selected>{{ form.supervisor[0]._id }}</option>
+                        <label>Centro de distribución</label> 
+                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion">
+                            <option selected>{{ form.ddcenter[0]._id }}</option>
                             <option>...</option>
                         </select>
                     </div>
@@ -57,9 +45,8 @@
             <br>
             <div class="row">
                 <div class="col">
-                    <input type="submit" value="Activar" v-on:click="activar()">
-                    <input type="submit" value="Suspender" v-on:click="suspender()">   
-                    <input type="button" value="Actualizar" v-on:click="editar()">               
+                    <input type="button" value="Actualizar" v-on:click="editar()">  
+                    <input type="submit" value="Eliminar" v-on:click="eliminar()">                
                     <input type="button" value="Salir" v-on:click="salir()">
                 </div>             
             </div>
@@ -71,84 +58,69 @@
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
-    name: "EditarVendedorView",
+    name: "EditarPlantillaView",
     components: {
       SidebarMenuAkahon
     },
     data: function(){
-        return {
+        return{
             form:{
                 "_id": "",
-                "name": "",
-                "lastName": "",
-                "password":"",
-                "role":"",
+                "title": "",
+                "message": "",
+                "priority":"",
                 "createAt":"",
-                "phone":"",
-                "email": "",
-                "state": "",
-                "supervisor": [
+                "ddcenter": [
                     {
                         "_id": ""
                     }
-                ]              
+                ],  
+                "author": [
+                    {
+                        "_id": ""
+                    }
+                ],           
             }
         }
     },
     methods:{
         editar(){
             this.$http
-            .put("/sellers/" + this.form._id, this.form)
+            .put("/templates/" + this.form._id, this.form)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
                 console.log(err)
             })
-            this.$router.push("/vendedorview")
+            this.$router.push("/plantillaview")
+        },
+        eliminar(){
+            this.$http
+            .delete("/templates/" + this.form._id)
+            .then(data => {
+                console.log(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            this.$router.push("/plantillaview")
         },
         salir(){
-            this.$router.push("/vendedorview")
-        },
-        suspender(){
-            this.state = "Suspendido"
-            this.$http
-            .put("/sellers/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            this.$router.push("/vendedorview")
-        },
-        activar(){                      
-            this.state = "Activo"
-            this.$http
-            .put("/sellers/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            this.$router.push("/vendedorview")
+            this.$router.push("/plantillaview")
         }
     },
     mounted: function(){
         this.form._id = this.$route.params.id
         this.$http
-        .get("/sellers/" + this.form._id)
-        .then(datos => {   
-            this.form.name = datos.data.seller.name
-            this.form.lastName = datos.data.seller.lastName
-            this.form.password = datos.data.seller.password
-            this.form.role = datos.data.seller.role
-            this.form.createAt = datos.data.seller.createAt.substring(0,10)
-            this.form.phone = datos.data.seller.phone
-            this.form.email = datos.data.seller.email
-            this.form.state = datos.data.seller.state
-            this.form.supervisor[0]._id = datos.data.seller.supervisor[0]._id
+        .get("/templates/" + this.form._id)
+        .then(datos => {
+            this.form.title = datos.data.template.title
+            this.form.message = datos.data.template.message
+            this.form.priority = datos.data.template.priority
+            this.form.createAt = datos.data.template.createAt.substring(0,10)
+            this.form.ddcenter[0]._id = datos.data.template.ddcenter[0]._id
+            this.form.author[0]._id = datos.data.template.author[0]._id
         })
         .catch(err => {
             console.log(err)
@@ -191,6 +163,36 @@ export default {
         display:inline-block;
         margin: 10px 8px 10px 8px; 
         color: #0B4C3C;
+    }
+
+    textarea {
+        background-color: #f6f6f6;
+        border: none;
+        color: #0d0d0d;
+        padding: 15px 32px;
+        text-align: left;
+        font-size: 16px;
+        margin: 5px;
+        width: 95%;
+        max-width: 950px;
+        min-width: 380px;
+        border: 2px solid #f6f6f6;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    textarea:focus{
+        background-color: #fff;
+        border-bottom: 2px solid #3FB85F;
+    }
+
+    textarea:placeholder {
+        color: #cccccc;
     }
 
     input[type=submit], input[type=reset]  {
@@ -264,7 +266,7 @@ export default {
         font-size: 16px;
         margin: 5px;
         width: 95%;
-        max-width: 620px;
+        max-width: 750px;
         min-width: 380px;
         border: 2px solid #f6f6f6;
         -webkit-transition: all 0.5s ease-in-out;

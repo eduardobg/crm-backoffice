@@ -11,6 +11,8 @@ import EditarVendedorView from '../views/EditarVendedorView'
 import AgregarVendedorView from '../views/AgregarVendedorView.vue'
 
 import PlantillaView from '../views/PlantillaView.vue'
+import EditarPlantillaView from '../views/EditarPlantillaView.vue'
+import AgregarPlantillaView from '../views/AgregarPlantillaView.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +56,16 @@ const routes = [
     path: '/plantillaview',
     name: 'PlantillaView',
     component: PlantillaView
+  },
+  {
+    path: '/editarplantillaview/:id',
+    name: 'EditarPlantillaView',
+    component: EditarPlantillaView
+  },
+  {
+    path: '/agregarplantillaview',
+    name: 'AgregarPlantillaView',
+    component: AgregarPlantillaView
   },
 ]
 

@@ -14,19 +14,14 @@
             <input type="submit" value="Nueva plantilla" v-on:click="agregar()">
            </div>
         </div>
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-            <div class="col">
-              Column
-            </div>
-            <div class="col">
-              Column
-            </div>
-            <div class="col">
-              Column
-            </div>
-            <div class="col">
-              Column
+        <div class="container-card">
+          <div class="row row-cols-2">
+            <div class="col-xl-4" v-for="templates in Listtemplates" :key="templates._id" v-on:click="editar(templates._id)">             
+              <div class="card">
+                <h3>{{ templates.title }}</h3>
+                <p>{{ templates.message }}</p>
+                <h6>{{templates.createAt.substring(0,10)}}</h6>
+              </div>
             </div>
           </div>
         </div>
@@ -40,11 +35,29 @@ export default {
     name: "PlantillaView",
     data(){
         return{
-
+            Listtemplates: null,
+            SearchId: null
         }
     },
     components: {
       SidebarMenuAkahon
+    },
+    methods: {
+      editar(id){
+        this.$router.push('/editarplantillaview/' + id)
+      },
+      agregar(){
+        this.$router.push('/agregarplantillaview')
+      },
+      buscar(){
+        this.$router.push('/editarplantillaview/' + this.SearchId)
+      }
+    },
+    mounted: function(){
+      this.$http
+      .get("/templates").then(data => {
+        this.Listtemplates = data.data.templates
+      })
     }
 }
 </script>
@@ -64,7 +77,33 @@ export default {
     text-align: right;
   }
 
-  
+  .container-card{
+    width: 100%;
+    max-width: 1550px;
+    margin: auto;
+    align-content: center;
+  }
+
+  @media screen and (max-width: 800px) {
+    .row-cols-2 {
+      place-content:justify;
+    } 
+  }
+  .card {
+    border-radius: 10px 10px 10px 10px;
+    min-height: 200px;
+    font-weight: bold;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: 20px;
+    
+    background: #F7F8F6;
+    box-shadow: 0 15px 30px 0 rgb(0 0 0 / 15%);
+    
+  }
 
   h1 {
     text-align: left;
@@ -74,6 +113,27 @@ export default {
     display:inline-block;
     margin: 40px 8px 10px 8px; 
     color: #0B4C3C;
+  }
+
+  h3 {
+    text-align: left;
+    font-size: 26px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #1D8A6B;
+  }
+
+  p {
+    text-align: justify;
+    font-size: 17px;
+    font-weight: 500;
+    color: #0d0d0d;
+  }
+
+  h6 {
+    text-align: end;
+    font-size: 17px;
+    font-weight: 600;
   }
 
   input[type=button], input[type=submit], input[type=reset]  {

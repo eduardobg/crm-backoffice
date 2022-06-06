@@ -39,7 +39,7 @@
                 <div class="row">                  
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="text" class="form-control" name="createat" id="createat" v-model="form.createAt" disabled>
+                        <input type="date" class="form-control" name="createat" id="createat" v-model="form.createAt" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Email</label> 
@@ -145,7 +145,7 @@ export default {
             this.form.lastName = datos.data.customer.lastName
             this.form.businessName = datos.data.customer.businessName
             this.form.ruc_dni = datos.data.customer.ruc_dni
-            this.form.createAt = datos.data.customer.createAt
+            this.form.createAt = datos.data.customer.createAt.substring(0,10)
             this.form.address = datos.data.customer.address
             this.form.phone = datos.data.customer.phone
             this.form.email = datos.data.customer.email
@@ -257,7 +257,7 @@ export default {
         transform: scale(0.95);
     }
 
-    input[type=text],select[type=text] {
+    input[type=text],input[type=date],select[type=text] {
         background-color: #f6f6f6;
         border: none;
         color: #0d0d0d;
@@ -278,12 +278,12 @@ export default {
         border-radius: 5px 5px 5px 5px;
     }
 
-    input[type=text]:focus, select[type=text]:focus {
+    input[type=text]:focus, input[type=date]:focus, select[type=text]:focus {
         background-color: #fff;
         border-bottom: 2px solid #3FB85F;
     }
 
-    input[type=text]:placeholder, select[type=text]:placeholder {
+    input[type=text]:placeholder, input[type=date]:placeholder, select[type=text]:placeholder {
         color: #cccccc;
     }
 </style>

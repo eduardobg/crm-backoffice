@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'HomeView',
   components: {
@@ -46,7 +44,8 @@ export default {
         "email": this.usuario,
         "password": this.contraseña
       };
-      axios.post('https://crm-utp.herokuapp.com/api/auth/login', json)
+      this.$http
+      .post('/auth/login', json)
       .then(data => {
         const { msg } = data.data
         if(msg === "Acceso concedido"){

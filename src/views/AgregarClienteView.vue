@@ -40,7 +40,7 @@
                     
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="text" class="form-control" name="createat" id="createat" placeholder="ej. 2022-05-23" v-model="form.createAt">
+                        <input type="date" class="form-control" name="createat" id="createat" placeholder="ej. 2022-05-23" v-model="form.createAt">
                     </div>
                     <div class="col-xl-4">
                         <label>Email</label> 
@@ -185,7 +185,7 @@ export default {
         transform: scale(0.95);
     }
 
-    input[type=text], select[type=text] {
+    input[type=text],input[type=date],select[type=text] {
         background-color: #f6f6f6;
         border: none;
         color: #0d0d0d;
@@ -206,12 +206,12 @@ export default {
         border-radius: 5px 5px 5px 5px;
     }
 
-    input[type=text]:focus, select[type=text]:focus {
+    input[type=text]:focus, input[type=date]:focus, select[type=text]:focus {
         background-color: #fff;
         border-bottom: 2px solid #3FB85F;
     }
 
-    input[type=text]:placeholder, select[type=text]:placeholder {
+    input[type=text]:placeholder, input[type=date]:placeholder, select[type=text]:placeholder {
         color: #cccccc;
     }
 </style>
