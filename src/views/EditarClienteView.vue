@@ -47,9 +47,9 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label>                    
-                        <select type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[this.indice]._id">
-                            <option selected>{{ form.seller[this.indice]._id }}</option>
-                            <option v-for="sellers in Listsellers" :key="sellers._id">{{ sellers._id }}</option>
+                        <select type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[0]._id">
+                            <option selected>{{ form.seller[0]._id }}</option>
+                            <option>...</option>
                         </select>
                     </div>
                 </div>
@@ -76,9 +76,7 @@ export default {
       SidebarMenuAkahon
     },
     data: function(){
-        return {     
-            indice: 0,
-            Listsellers: null,     
+        return {      
             form:{
                 "_id": "",
                 "name": "",
@@ -151,18 +149,12 @@ export default {
             this.form.address = datos.data.customer.address
             this.form.phone = datos.data.customer.phone
             this.form.email = datos.data.customer.email
-            this.form.seller[this.indice]._id = datos.data.customer.seller[this.indice]._id
+            this.form.seller[0]._id = datos.data.customer.seller[0]._id
             this.form.state = datos.data.customer.state
         })
         .catch(err => {
             console.log(err)
         })
-
-        this.$http
-        .get("/sellers").then(data => {
-            this.Listsellers = data.data.sellers    
-        })
-        
     }
 }
 </script>

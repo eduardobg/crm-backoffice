@@ -9,17 +9,17 @@
           <form action="" class="form-horizontal left">
                 <div class="row">
                     <div class="col-xl-4">
+                        <label>DNI</label> 
+                        <input type="text" class="form-control" name="dni" id="dni" placeholder="ej. 75544332" v-model="form.dni">
+                    </div>  
+                    <div class="col-xl-4">
                         <label>Nombre</label> 
                         <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ej. Jeremy" v-model="form.name">
                     </div>
                     <div class="col-xl-4">
                         <label>Apellido</label> 
                         <input type="text" class="form-control" name="apellido" id="apellido" placeholder="ej. Villafuerte" v-model="form.lastName">
-                    </div>
-                    <div class="col-xl-4">
-                        <label>Telefono</label> 
-                        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987876765" v-model="form.phone">
-                    </div>                
+                    </div>              
                 </div>
                 <hr>
                 <div class="row">
@@ -32,12 +32,9 @@
                         <input type="text" class="form-control" name="contraseña" id="contraseña" placeholder="ej. 123456" v-model="form.password">
                     </div>
                     <div class="col-xl-4">
-                        <label>Estado</label> 
-                        <select type="text" class="form-control" name="estado" id="estado" placeholder="ej. Activo o Suspendido" v-model="form.state">
-                            <option selected>Activo</option>
-                            <option>Suspendido</option>
-                        </select>
-                    </div>
+                        <label>Telefono</label> 
+                        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987876765" v-model="form.phone">
+                    </div> 
                 </div>               
                 <div class="row">                    
                     <div class="col-xl-4">
@@ -76,6 +73,7 @@ export default {
     data: function(){
         return{
             form:{
+                "dni": "",
                 "name": "",
                 "lastName": "",
                 "password":"",
