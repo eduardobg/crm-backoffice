@@ -177,7 +177,7 @@ export default {
             icon: 'bx-store',
           },
           {
-            link: '#',
+            link: '/mensajeview',
             name: 'Mis mensajes',
             tooltip: 'Mensajes',
             icon: 'bx-chat',

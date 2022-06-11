@@ -49,8 +49,8 @@
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label> 
                         <select type="text" class="form-control" name="vendedor" id="vendedor">
-                            <option selected>{{ form.seller[0]._id="62813299d73ba5a57f344ccd" }}</option>
-                            <option>{{ "..." }}</option>
+                            <option>Seleccionar ID</option>
+                            <option v-for="sellers in Listsellers" :key="sellers._id">{{ sellers._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -73,6 +73,7 @@ export default {
     name: "AgregarClienteView",
     data: function(){
         return {          
+            Listsellers: null,         
             form:{
                 "name": "",
                 "lastName": "",
@@ -108,6 +109,12 @@ export default {
         salir(){
             this.$router.push("/dashboardview")
         },
+    },
+    mounted: function(){
+      this.$http
+      .get("/sellers").then(data => {
+        this.Listsellers = data.data.sellers    
+      })
     }
 }
 </script>

@@ -14,6 +14,10 @@ import PlantillaView from '../views/PlantillaView.vue'
 import EditarPlantillaView from '../views/EditarPlantillaView.vue'
 import AgregarPlantillaView from '../views/AgregarPlantillaView.vue'
 
+import MensajeView from '../views/MensajeView.vue'
+import EnviarMensajePersonalizado from '../views/EnviarMensajePersonalizado.vue'
+import EnviarMensajePlantilla from '../views/EnviarMensajePlantilla.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -66,6 +70,21 @@ const routes = [
     path: '/agregarplantillaview',
     name: 'AgregarPlantillaView',
     component: AgregarPlantillaView
+  },
+  {
+    path: '/mensajeview',
+    name: 'MensajeView',
+    component: MensajeView
+  },
+  {
+    path: '/enviarmensajepersonalizado',
+    name: 'EnviarMensajePersonalizado',
+    component: EnviarMensajePersonalizado
+  },
+  {
+    path: '/enviarmensajeplantilla',
+    name: 'EnviarMensajePlantilla',
+    component: EnviarMensajePlantilla
   },
 ]
 
