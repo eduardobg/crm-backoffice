@@ -11,7 +11,7 @@
             <input type="text" placeholder="Buscar supervisor por DNI" v-model="SearchDNI" v-on:keypress.enter="buscar()">
           </div>
           <div class="col especial">
-            <input type="submit" value="Nuevo Vendedor" v-on:click="agregar()">
+            <input type="submit" value="Nuevo Supervisor" v-on:click="agregar()">
            </div>
         </div>
         <div class="row">
