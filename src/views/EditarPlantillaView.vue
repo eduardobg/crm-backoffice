@@ -14,7 +14,11 @@
                     </div>  
                     <div class="col-xl-4">
                         <label>Prioridad</label> 
-                        <input type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
+                        <select type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
+                            <option value="">Selecionar prioridad</option>
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
                     </div>               
                 </div>
                 <div class="row">

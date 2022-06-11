@@ -10,22 +10,22 @@
             <div class="row">
                 <div class="col-xl-4">
                     <label>ID del vendedor</label> 
-                     <input type="text" class="form-control" name="idvendedor" id="idvendedor" v-model="form.id_seller">
+                     <input type="text" class="form-control" name="idvendedor" id="idvendedor" placeholder="ej. 62a2dde82ed4f54907c521cc" v-model="form.id_seller">
                 </div>
                 <div class="col-xl-4">
                     <label>ID del cliente</label> 
-                    <input type="text" class="form-control" name="idcliente" id="idcliente" v-model="form.id_customer">
+                    <input type="text" class="form-control" name="idcliente" id="idcliente" placeholder="ej. 62885b940352c73fe93dc16f" v-model="form.id_customer">
                 </div>
                 <div class="col-xl-4">
                     <label>Telefono</label> 
-                    <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.receiver_phone">
+                    <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987987987" v-model="form.receiver_phone">
                 </div>                
             </div>
             <hr>
             <div class="row">
                 <div class="col-xl-9">
                     <label>ID de la plantilla</label> 
-                    <input type="text" class="form-control" name="idplantilla" id="idplantilla" v-model="plantilla">
+                    <input type="text" class="form-control" name="idplantilla" id="idplantilla" placeholder="ej. 629da819c3ad7232ba72bab0" v-model="plantilla">
                 </div>  
             </div>                              
         </form>

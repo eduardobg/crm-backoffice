@@ -10,17 +10,21 @@
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Titulo</label> 
-                        <input type="text" class="form-control" name="titulo" id="titulo" v-model="form.title">
+                        <input type="text" class="form-control" name="titulo" id="titulo" placeholder="ej. Rumbo al mundial" v-model="form.title">
                     </div>  
                     <div class="col-xl-4">
                         <label>Prioridad</label> 
-                        <input type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
+                        <select type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
+                            <option value="">Selecionar prioridad</option>
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
                     </div>               
                 </div>
                 <div class="row">
                     <div class="col-xl-9">
                         <label>Mensaje</label> 
-                        <textarea class="form-control" name="mensaje" id="mensaje" v-model="form.message"></textarea>
+                        <textarea class="form-control" name="mensaje" id="mensaje" placeholder="Escribir el mensaje de la campaña..." v-model="form.message"></textarea>
                     </div>               
                 </div>
                 <hr>
