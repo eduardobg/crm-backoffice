@@ -1,9 +1,9 @@
 <template>
   <div>
-      <SidebarMenuAkahon />
-      <div class="container">
+    <SidebarMenuAkahon />
+    <div class="container">
           <div class="row">
-                <h1>Actualizar datos del vendedor</h1>
+                <h1>Actualizar datos del supervisor</h1>
           </div>           
           <br>
           <form action="" class="form-horizontal left">
@@ -11,7 +11,7 @@
                     <div class="col-xl-4">
                         <label>DNI</label> 
                         <input type="text" class="form-control" name="dni" id="dni" v-model="form.dni">
-                    </div>  
+                    </div>   
                     <div class="col-xl-4">
                         <label>Nombre</label> 
                         <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
@@ -19,7 +19,7 @@
                     <div class="col-xl-4">
                         <label>Apellido</label> 
                         <input type="text" class="form-control" name="apellido" id="apellido" v-model="form.lastName">
-                    </div>                       
+                    </div>                                 
                 </div>
                 <hr>                
                 <div class="row">
@@ -34,7 +34,7 @@
                     <div class="col-xl-4">
                         <label>Telefono</label> 
                         <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.phone">
-                    </div>  
+                    </div>
                 </div>
                 <div class="row">                    
                     <div class="col-xl-4">
@@ -46,9 +46,9 @@
                         <input type="text" class="form-control" name="email" id="email" v-model="form.email" disabled>
                     </div>
                     <div class="col-xl-4">
-                        <label>Supervisor asignado</label>                    
-                        <select type="text" class="form-control" name="supervisor" id="supervisor">
-                            <option selected>{{ form.supervisor[0]._id }}</option>
+                        <label>Centro de Distrib. asignado</label>                    
+                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion">
+                            <option selected>{{ form.ddcenter[0]._id }}</option>
                             <option>...</option>
                         </select>
                     </div>
@@ -71,12 +71,12 @@
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
-    name: "EditarVendedorView",
+    name: 'EditarSupervisorView',
     components: {
       SidebarMenuAkahon
     },
     data: function(){
-        return {
+        return{
             form:{
                 "_id": "",
                 "dni": "",
@@ -88,69 +88,69 @@ export default {
                 "phone":"",
                 "email": "",
                 "state": "",
-                "supervisor": [
+                "ddcenter": [
                     {
-                        "_id": ""
+                    "_id": ""
                     }
-                ]              
+                ]
             }
         }
-    },
+    }, 
     methods:{
         editar(){
             this.$http
-            .put("/sellers/" + this.form._id, this.form)
+            .put("/supervisors/" + this.form._id, this.form)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
                 console.log(err)
             })
-            this.$router.push("/vendedorview")
+            this.$router.push("/supervisorview")
         },
         salir(){
-            this.$router.push("/vendedorview")
+            this.$router.push("/supervisorview")
         },
         suspender(){
             this.state = "Suspendido"
             this.$http
-            .put("/sellers/" + this.form._id + "/" + this.state)
+            .put("/supervisors/" + this.form._id + "/" + this.state)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
                 console.log(err)
             })
-            this.$router.push("/vendedorview")
+            this.$router.push("/supervisorview")
         },
         activar(){                      
             this.state = "Activo"
             this.$http
-            .put("/sellers/" + this.form._id + "/" + this.state)
+            .put("/supervisors/" + this.form._id + "/" + this.state)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
                 console.log(err)
             })
-            this.$router.push("/vendedorview")
+            this.$router.push("/supervisorview")
         }
     },
     mounted: function(){
         this.form._id = this.$route.params.id
         this.$http
-        .get("/sellers/" + this.form._id)
+        .get("/supervisors/" + this.form._id)
         .then(datos => {   
-            this.form.dni = datos.data.seller.dni
-            this.form.name = datos.data.seller.name
-            this.form.lastName = datos.data.seller.lastName
-            this.form.password = datos.data.seller.password
-            this.form.role = datos.data.seller.role
-            this.form.createAt = datos.data.seller.createAt.substring(0,10)
-            this.form.phone = datos.data.seller.phone
-            this.form.email = datos.data.seller.email
-            this.form.state = datos.data.seller.state
-            this.form.supervisor[0]._id = datos.data.seller.supervisor[0]._id
+            this.form.dni = datos.data.supervisor.dni
+            this.form.name = datos.data.supervisor.name
+            this.form.lastName = datos.data.supervisor.lastName
+            this.form.password = datos.data.supervisor.password
+            this.form.role = datos.data.supervisor.role
+            this.form.createAt = datos.data.supervisor.createAt.substring(0,10)
+            this.form.phone = datos.data.supervisor.phone
+            this.form.email = datos.data.supervisor.email
+            this.form.state = datos.data.supervisor.state
+            this.form.ddcenter[0]._id = datos.data.supervisor.ddcenter[0]._id
         })
         .catch(err => {
             console.log(err)

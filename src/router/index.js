@@ -18,6 +18,10 @@ import MensajeView from '../views/MensajeView.vue'
 import EnviarMensajePersonalizado from '../views/EnviarMensajePersonalizado.vue'
 import EnviarMensajePlantilla from '../views/EnviarMensajePlantilla.vue'
 
+import SupervisorView from '../views/SupervisorView.vue'
+import EditarSupervisorView from '../views/EditarSupervisorView.vue'
+import AgregarSupervisorView from '../views/AgregarSupervisorView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -85,6 +89,21 @@ const routes = [
     path: '/enviarmensajeplantilla',
     name: 'EnviarMensajePlantilla',
     component: EnviarMensajePlantilla
+  },
+  {
+    path: '/supervisorview',
+    name: 'SupervisorView',
+    component: SupervisorView
+  },
+  {
+    path: '/editarsupervisorview/:id',
+    name: 'EditarSupervisorView',
+    component: EditarSupervisorView
+  },
+  {
+    path: '/agregarsupervisorview',
+    name: 'AgregarSupervisorView',
+    component: AgregarSupervisorView
   },
 ]
 

@@ -8,7 +8,7 @@
         <br>
         <div class="row">
           <div class="col izquierda">
-            <input type="text" placeholder="Buscar vendedor por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
+            <input type="text" placeholder="Buscar vendedor por DNI" v-model="SearchDNI" v-on:keypress.enter="buscar()">
           </div>
           <div class="col especial">
             <input type="submit" value="Nuevo Vendedor" v-on:click="agregar()">
@@ -18,7 +18,7 @@
           <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">ID</th>
+              <th scope="col">DNI</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
               <th scope="col">Telefono</th>
@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr v-for="sellers in Listsellers" :key="sellers._id" v-on:click="editar(sellers._id)">
-              <td>{{ sellers._id }}</td>
+              <td>{{ sellers.dni }}</td>
               <td>{{ sellers.name }}</td>
               <td>{{ sellers.lastName }}</td>
               <td>{{ sellers.phone }}</td>
@@ -49,7 +49,7 @@ export default {
     data(){
         return {
             Listsellers: null,
-            SearchId: null
+            SearchDNI: null,
         }
     },
     components: {
@@ -62,8 +62,16 @@ export default {
       agregar(){
         this.$router.push('/agregarvendedorview')
       },
-      buscar(){
-        this.$router.push('/editarvendedorview/' + this.SearchId)
+      buscar(){ 
+        this.$http
+        .get("/sellers/dni/"+this.SearchDNI)
+        .then(datos => {   
+            this.id = datos.data.sellerDB._id
+            this.$router.push('/editarvendedorview/'+this.id)
+        })
+        .catch(err => {
+            console.log(err)
+        })      
       }
     },
     mounted: function(){

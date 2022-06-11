@@ -165,7 +165,7 @@ export default {
             icon: 'bx-group',
           },
           {
-            link: '#',
+            link: '/supervisorview',
             name: 'Supervisores',
             tooltip: 'Supervisores',
             icon: 'bx-user-voice',
