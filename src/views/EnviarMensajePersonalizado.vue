@@ -9,16 +9,31 @@
         <form action="" class="form-horizontal left">
             <div class="row">
                 <div class="col-xl-4">
-                    <label>ID del vendedor</label> 
-                     <input type="text" class="form-control" name="idvendedor" id="idvendedor" placeholder="ej. 62a2dde82ed4f54907c521cc" v-model="form.id_seller">
+                    <label>DNI del vendedor</label> 
+                     <input type="text" name="dnivendedor" id="dnivendedor" placeholder="Buscar vendedor por DNI" v-model="search_seller" v-on:keypress.enter="buscarvendedor()">
+                </div> 
+                <div class="col-xl-4">
+                    <label>Nombre</label> 
+                    <input type="text" class="form-control" name="nombre" id="nombre" v-model="nombre" disabled>
+                </div>  
+                <div class="col-xl-4">
+                    <label>Apellido</label> 
+                    <input type="text" class="form-control" name="apellido" id="apellido" v-model="apellido" disabled>
+                </div>              
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xl-4">
+                    <label>DNI del cliente</label> 
+                    <input type="text" name="dnicliente" id="dnicliente" placeholder="Buscar cliente por DNI" v-model="search_customer" v-on:keypress.enter="buscarcliente()">
                 </div>
                 <div class="col-xl-4">
-                    <label>ID del cliente</label> 
-                    <input type="text" class="form-control" name="idcliente" id="idcliente" placeholder="ej. 62885b940352c73fe93dc16f" v-model="form.id_customer">
-                </div>
+                    <label>Negocio</label> 
+                    <input type="text" class="form-control" name="negocio" id="negocio" v-model="negocio" disabled>
+                </div>  
                 <div class="col-xl-4">
                     <label>Telefono</label> 
-                    <input type="text" class="form-control" name="telefono" id="telefono" placeholder="ej. 987987987" v-model="form.receiver_phone">
+                    <input type="text" class="form-control" name="telefono" id="telefono" v-model="form.receiver_phone" disabled>
                 </div>                
             </div>
             <hr>
@@ -47,6 +62,11 @@ export default {
     name: "EnviarMensajePersonalizado",
     data(){
         return{
+            search_seller: "",
+            nombre: "",
+            apellido: "",
+            search_customer: "",
+            negocio: "",
             form:{
                 "id_seller": "",
                 "id_customer": "",
@@ -73,6 +93,30 @@ export default {
         salir(){
             this.$router.push("/mensajeview")
         },
+        buscarvendedor(){
+            this.$http
+            .get("/sellers/dni/"+this.search_seller)
+            .then(datos => {   
+                this.form.id_seller = datos.data.sellerDB._id
+                this.nombre = datos.data.sellerDB.name
+                this.apellido = datos.data.sellerDB.lastName
+            })
+            .catch(err => {
+                console.log(err)
+            })     
+        },
+        buscarcliente(){
+            this.$http
+            .get("/customers/dni/"+this.search_customer)
+            .then(datos => {                  
+                this.form.id_customer = datos.data.customer._id
+                this.negocio = datos.data.customer.businessName
+                this.form.receiver_phone = datos.data.customer.phone
+            })
+            .catch(err => {
+                console.log(err)
+            })      
+        }
     }
 }
 </script>
