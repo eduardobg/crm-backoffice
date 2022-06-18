@@ -22,8 +22,8 @@
                     <div class="col-xl-4" v-for="campaignMessages in ListcampaignMessages" :key="campaignMessages._id">             
                       <div class="card">
                         <h3>{{ "ID Mensaje: " + campaignMessages._id }}</h3>
-                        <h5>{{ "De: " +campaignMessages.id_seller }}</h5>
-                        <h5>{{ "Para: " +campaignMessages.id_customer }}</h5>
+                        <h5>{{ "De: " + nombrevendedor(campaignMessages.id_seller) + NameSeller }}</h5>
+                        <h5>{{ "Para: " + nombrecliente(campaignMessages.id_customer) + NameCustomer }}</h5>
                         <p>{{ campaignMessages.message }}</p>
                         <h6>{{ campaignMessages.receiver_phone }}</h6>
                       </div>
@@ -40,8 +40,10 @@ import SidebarMenuAkahon from '@/components/SidebarComp.vue'
 
 export default {
     name: "PlantillaView",
-    data(){
+    data(){       
         return{
+          NameSeller: "",
+          NameCustomer: "",
           ListcampaignMessages: null,
           SearchId: "62a2dde82ed4f54907c521cc",
           CantMessage: null
@@ -63,7 +65,25 @@ export default {
             this.ListcampaignMessages = data.data.campaignMessages
             this.CantMessage = data.data.total
           })
-        }
+        },
+        nombrevendedor(id){
+          this.$http.get("/sellers/"+id).then(datos => {   
+              this.NameSeller = datos.data.seller.name
+          })
+          .catch(err => {
+              console.log(err)
+          }) 
+          return ""
+        },
+        nombrecliente(id){
+          this.$http.get("/customers/"+id).then(datos => {   
+              this.NameCustomer = datos.data.customer.name
+          })
+          .catch(err => {
+              console.log(err)
+          }) 
+          return ""
+        },
     },
     mounted: function(){
       this.$http

@@ -171,7 +171,7 @@ export default {
             icon: 'bx-user-voice',
           },
           {
-            link: '#',
+            link: '/centrodistribucionview',
             name: 'Centros Distribución',
             tooltip: 'Centros',
             icon: 'bx-store',

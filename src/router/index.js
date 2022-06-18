@@ -22,6 +22,9 @@ import SupervisorView from '../views/SupervisorView.vue'
 import EditarSupervisorView from '../views/EditarSupervisorView.vue'
 import AgregarSupervisorView from '../views/AgregarSupervisorView.vue'
 
+import CentroDistribucionView from '../views/CentroDistribucionView.vue'
+import EditarCentroDistribucionView from '../views/EditarCentroDistribucionView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -104,6 +107,16 @@ const routes = [
     path: '/agregarsupervisorview',
     name: 'AgregarSupervisorView',
     component: AgregarSupervisorView
+  },
+  {
+    path: '/centrodistribucionview',
+    name: 'CentroDistribucionView',
+    component: CentroDistribucionView
+  },
+  {
+    path: '/editarcentrodistribucionview/:id',
+    name: 'EditarCentroDistribucionView',
+    component: EditarCentroDistribucionView
   },
 ]
 
