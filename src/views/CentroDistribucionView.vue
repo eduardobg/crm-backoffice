@@ -8,7 +8,7 @@
         <br>
         <div class="row">
           <div class="col izquierda">
-            <input type="text" placeholder="Buscar centro de distr. por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
+            <input type="text" placeholder="Buscar centro de distribución por ID" v-model="SearchId" v-on:keypress.enter="buscar()">
           </div>
           <div class="col especial">
             <input type="submit" value="Nuevo Centro de Distr." v-on:click="agregar()">
@@ -35,7 +35,7 @@
               <td>{{ distributions.district }}</td>
               <td>{{ distributions.province }}</td>
               <td>{{ distributions.department }}</td>
-              <td>{{ distributions.status }}</td>
+              <td>{{ distributions.state }}</td>
             </tr>
           </tbody>
           </table>

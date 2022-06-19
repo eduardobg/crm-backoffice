@@ -2,129 +2,83 @@
   <div>
     <SidebarMenuAkahon />
     <div class="container">
-      <div class="row">
-        <h1>Actualizar datos del centro de distribución</h1>
-      </div>           
-      <br>
-      <form action="" class="form-horizontal left">
         <div class="row">
-          <div class="col-xl-4">
-            <label>Nombre</label> 
-            <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
-          </div>
-          <div class="col-xl-4">
-            <label>Direccion</label> 
-            <input type="text" class="form-control" name="direccion" id="direccion" v-model="form.address">
-          </div>   
-          <div class="col-xl-4">
-            <label>Estado</label> 
-            <input type="text" class="form-control" name="state" id="state" v-model="form.state" disabled>
-          </div>                                 
-        </div>
-        <hr>                
+            <h1>Registrar datos del centro de distribución</h1>
+        </div>           
+        <br>
+        <form action="" class="form-horizontal left">
+            <div class="row">
+                <div class="col-xl-4">
+                    <label>Nombre</label> 
+                    <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
+                </div>
+                <div class="col-xl-4">
+                    <label>Direccion</label> 
+                    <input type="text" class="form-control" name="direccion" id="direccion" v-model="form.address">
+                </div>                                
+            </div>
+            <hr>                
+            <div class="row">
+                <div class="col-xl-4">
+                    <label>Distrito</label> 
+                    <input type="text" class="form-control" name="distrito" id="distrito" v-model="form.district" >
+                </div>
+                <div class="col-xl-4">
+                    <label>Provincia</label>  
+                    <input type="text" class="form-control" name="provincia" id="provincia" v-model="form.province" >
+                </div>
+                <div class="col-xl-4">
+                    <label>Departament</label> 
+                    <input type="text" class="form-control" name="departamento" id="departamento" v-model="form.department">
+                </div>
+            </div>
+        </form>
+        <br>
         <div class="row">
-          <div class="col-xl-4">
-            <label>Distrito</label> 
-            <input type="text" class="form-control" name="distrito" id="distrito" v-model="form.district" >
-          </div>
-          <div class="col-xl-4">
-            <label>Provincia</label>  
-            <input type="text" class="form-control" name="provincia" id="provincia" v-model="form.province" >
-          </div>
-          <div class="col-xl-4">
-            <label>Departament</label> 
-            <input type="text" class="form-control" name="departamento" id="departamento" v-model="form.department">
-          </div>
+            <div class="col">
+                <input type="button" value="Guardar" v-on:click="guardar()">
+                <input type="button" value="Salir" v-on:click="salir()">
+            </div>             
         </div>
-      </form>
-      <br>
-      <div class="row">
-        <div class="col">
-          <input type="submit" value="Activar" v-on:click="activar()">
-          <input type="submit" value="Suspender" v-on:click="suspender()">   
-          <input type="button" value="Actualizar" v-on:click="editar()">               
-          <input type="button" value="Salir" v-on:click="salir()">
-        </div>             
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
+
 export default {
-    name: 'EditarCentroDistribucionView',
+    name: 'AgregarCentroDistribucionView',
     components: {
       SidebarMenuAkahon
     },
     data: function(){
-      return{
-        form:{
-          "_id": "",
-          "name": "",
-          "address": "",
-          "district": "",
-          "province": "",
-          "department": "",
-          "state": ""
+        return{
+            form:{
+                "name": "",
+                "address": "",
+                "district": "",
+                "province": "",
+                "department": "",
+                "state": "Activo"
+            }
         }
-      }
     },
-    methods:{
-      editar(){
-        this.$http
-            .put("/distributions/" + this.form._id, this.form)
+    methods: {
+        guardar(){
+            this.$http
+            .post("/distributions",this.form)
             .then(data => {
                 console.log(data)
             })
             .catch(err => {
-                console.log(err)
-            })
-        this.$router.push("/centrodistribucionview")
-      },
-      salir(){
-        this.$router.push("/centrodistribucionview")
-      },
-      suspender(){
-        this.state = "Suspendido"
-        this.$http
-            .put("/distributions/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        this.$router.push("/centrodistribucionview")
-      },
-      activar(){
-        this.state = "Activo"
-        this.$http
-            .put("/distributions/" + this.form._id + "/" + this.state)
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        this.$router.push("/centrodistribucionview")
-      }
-    },
-    mounted: function(){
-      this.form._id = this.$route.params.id
-      this.$http
-      .get("/distributions/" + this.form._id)
-      .then(datos => {
-        this.form.name = datos.data.distribution.name
-        this.form.address = datos.data.distribution.address
-        this.form.district = datos.data.distribution.district
-        this.form.province = datos.data.distribution.province
-        this.form.department = datos.data.distribution.department
-        this.form.state = datos.data.distribution.state
-      })
-      .catch(err => {
-        console.log(err)
-      })
+                console.log(err)        
+            }) 
+            this.$router.push("/centrodistribucionview")
+        },
+        salir(){
+            this.$router.push("/centrodistribucionview")
+        },
     }
 }
 </script>
@@ -163,6 +117,36 @@ export default {
         display:inline-block;
         margin: 10px 8px 10px 8px; 
         color: #0B4C3C;
+    }
+
+    textarea {
+        background-color: #f6f6f6;
+        border: none;
+        color: #0d0d0d;
+        padding: 15px 32px;
+        text-align: left;
+        font-size: 16px;
+        margin: 5px;
+        width: 95%;
+        max-width: 950px;
+        min-width: 380px;
+        border: 2px solid #f6f6f6;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    textarea:focus{
+        background-color: #fff;
+        border-bottom: 2px solid #3FB85F;
+    }
+
+    textarea:placeholder {
+        color: #cccccc;
     }
 
     input[type=submit], input[type=reset]  {
@@ -236,7 +220,7 @@ export default {
         font-size: 16px;
         margin: 5px;
         width: 95%;
-        max-width: 620px;
+        max-width: 750px;
         min-width: 380px;
         border: 2px solid #f6f6f6;
         -webkit-transition: all 0.5s ease-in-out;
