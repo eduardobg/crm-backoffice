@@ -47,9 +47,9 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Centro de Distrib. asignado</label>                    
-                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion">
-                            <option selected>{{ form.ddcenter[0]._id = "62913608faf2217807eec7e2" }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion" v-model="form.ddcenter">
+                            <option disabled value="">Seleccionar ID</option>
+                            <option v-for="distributions in Listdistributions" :key="distributions._id">{{ distributions._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -75,6 +75,7 @@ export default {
     },
     data: function(){
         return{
+            Listdistributions: null,
             form:{
                 "dni": "",
                 "name": "",
@@ -85,11 +86,7 @@ export default {
                 "phone":"",
                 "email": "",
                 "state": "-",
-                "ddcenter": [
-                    {
-                    "_id": ""
-                    }
-                ]
+                "ddcenter": ""
             }
         }
     }, 
@@ -108,6 +105,12 @@ export default {
         salir(){
             this.$router.push("/supervisorview")
         },
+    },
+    mounted: function(){
+        this.$http
+        .get("/distributions").then(data => {
+            this.Listdistributions = data.data.distributions
+        })
     }
 }
 </script>

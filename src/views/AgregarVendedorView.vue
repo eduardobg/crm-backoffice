@@ -47,9 +47,9 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Supervisor asignado</label>                    
-                        <select type="text" class="form-control" name="supervisor" id="supervisor">
-                            <option selected>{{ form.supervisor[0]._id="62813299d73ba5a57f344ccd" }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="supervisor" id="supervisor" v-model="form.supervisor">
+                            <option disabled value="">Seleccionar ID</option>
+                            <option v-for="supervisors in Listsupervisors" :key="supervisors._id">{{ supervisors._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -72,6 +72,7 @@ export default {
     name: "AgregarVendedorView",
     data: function(){
         return{
+            Listsupervisors: null,
             form:{
                 "dni": "",
                 "name": "",
@@ -82,11 +83,7 @@ export default {
                 "phone":"",
                 "email": "",
                 "state": "",
-                "supervisor": [
-                    {
-                        "_id": ""
-                    }
-                ]              
+                "supervisor": ""         
             }
         }
     },
@@ -108,6 +105,12 @@ export default {
         salir(){
             this.$router.push("/vendedorview")
         },
+    },
+    mounted: function(){
+      this.$http
+      .get("/supervisors").then(data => {
+        this.Listsupervisors = data.data.supervisors    
+      })
     }
 }
 </script>

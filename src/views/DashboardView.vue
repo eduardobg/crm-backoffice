@@ -3,7 +3,7 @@
       <SidebarMenuAkahon />    
       <div class="container izquierda">
         <div class="row">
-          <h1>Lista de clientes plus</h1>
+          <h1>Lista de clientes</h1>
         </div>
         <br>
         <div class="row">

@@ -47,9 +47,8 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Supervisor asignado</label>                    
-                        <select type="text" class="form-control" name="supervisor" id="supervisor">
-                            <option selected>{{ form.supervisor[0]._id }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="supervisor" id="supervisor" v-model="form.supervisor">
+                            <option v-for="supervisors in Listsupervisors" :key="supervisors._id">{{ supervisors._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -77,6 +76,7 @@ export default {
     },
     data: function(){
         return {
+            Listsupervisors: null,
             form:{
                 "_id": "",
                 "dni": "",
@@ -88,11 +88,7 @@ export default {
                 "phone":"",
                 "email": "",
                 "state": "",
-                "supervisor": [
-                    {
-                        "_id": ""
-                    }
-                ]              
+                "supervisor": ""
             }
         }
     },
@@ -150,10 +146,15 @@ export default {
             this.form.phone = datos.data.seller.phone
             this.form.email = datos.data.seller.email
             this.form.state = datos.data.seller.state
-            this.form.supervisor[0]._id = datos.data.seller.supervisor[0]._id
+            this.form.supervisor = datos.data.seller.supervisor
         })
         .catch(err => {
             console.log(err)
+        })
+
+        this.$http
+        .get("/supervisors").then(data => {
+            this.Listsupervisors = data.data.supervisors    
         })
     }
 }

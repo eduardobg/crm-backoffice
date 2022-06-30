@@ -47,9 +47,8 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Centro de Distrib. asignado</label>                    
-                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion">
-                            <option selected>{{ form.ddcenter[0]._id }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion" v-model="form.ddcenter">
+                            <option v-for="distributions in Listdistributions" :key="distributions._id">{{ distributions._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -88,11 +87,7 @@ export default {
                 "phone":"",
                 "email": "",
                 "state": "",
-                "ddcenter": [
-                    {
-                    "_id": ""
-                    }
-                ]
+                "ddcenter": ""
             }
         }
     }, 
@@ -150,10 +145,15 @@ export default {
             this.form.phone = datos.data.supervisor.phone
             this.form.email = datos.data.supervisor.email
             this.form.state = datos.data.supervisor.state
-            this.form.ddcenter[0]._id = datos.data.supervisor.ddcenter[0]._id
+            this.form.ddcenter = datos.data.supervisor.ddcenter
         })
         .catch(err => {
             console.log(err)
+        })
+
+        this.$http
+        .get("/distributions").then(data => {
+            this.Listdistributions = data.data.distributions
         })
     }
 }

@@ -47,9 +47,8 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Vendedor asignado</label>                    
-                        <select type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller[0]._id">
-                            <option selected>{{ form.seller[0]._id }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="vendedor" id="vendedor" v-model="form.seller">
+                            <option v-for="sellers in Listsellers" :key="sellers._id">{{ sellers._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -77,6 +76,7 @@ export default {
     },
     data: function(){
         return {      
+            Listsellers: null,
             form:{
                 "_id": "",
                 "name": "",
@@ -87,11 +87,7 @@ export default {
                 "address":"",
                 "phone":"",
                 "email": "",
-                "seller": [
-                    {
-                        "_id": ""
-                    }
-                ],
+                "seller": "",
                 "state": ""
             }
         }
@@ -149,12 +145,18 @@ export default {
             this.form.address = datos.data.customer.address
             this.form.phone = datos.data.customer.phone
             this.form.email = datos.data.customer.email
-            this.form.seller[0]._id = datos.data.customer.seller[0]._id
+            this.form.seller = datos.data.customer.seller
             this.form.state = datos.data.customer.state
         })
         .catch(err => {
             console.log(err)
         })
+
+        this.$http
+        .get("/sellers").then(data => {
+            this.Listsellers = data.data.sellers    
+        })
+
     }
 }
 </script>
