@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-xl-4">
                         <label>Rol empresarial</label> 
-                        <input type="text" class="form-control" name="rol" id="rol" placeholder="ej. vendedor" v-model="form.role">
+                        <input type="text" class="form-control" name="rol" id="rol" placeholder="ej. vendedor" v-model="form.role" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Contraseña</label>  
@@ -73,12 +73,13 @@ export default {
     data: function(){
         return{
             Listsupervisors: null,
+            Mensaje: null,
             form:{
                 "dni": "",
                 "name": "",
                 "lastName": "",
                 "password":"",
-                "role":"",
+                "role":"vendedor",
                 "createAt":"",
                 "phone":"",
                 "email": "",
@@ -95,10 +96,12 @@ export default {
             this.$http
             .post("/sellers",this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Vendedor registrado. Por favor, actualizar la página")  
             })
             .catch(err => {
-                console.log(err)        
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)        
             }) 
             this.$router.push("/vendedorview")
         },

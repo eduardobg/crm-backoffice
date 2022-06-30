@@ -76,6 +76,8 @@ export default {
     },
     data: function(){
         return{
+            Listdistributions: null,
+            Mensaje: null,
             form:{
                 "_id": "",
                 "dni": "",
@@ -96,10 +98,12 @@ export default {
             this.$http
             .put("/supervisors/" + this.form._id, this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Supervisor actualizado. Por favor, actualizar la página")
             })
             .catch(err => {
-                console.log(err)
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)     
             })
             this.$router.push("/supervisorview")
         },
@@ -111,7 +115,8 @@ export default {
             this.$http
             .put("/supervisors/" + this.form._id + "/" + this.state)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Supervisor suspendido. Por favor, actualizar la página")
             })
             .catch(err => {
                 console.log(err)
@@ -123,7 +128,8 @@ export default {
             this.$http
             .put("/supervisors/" + this.form._id + "/" + this.state)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Supervisor activo. Por favor, actualizar la página")
             })
             .catch(err => {
                 console.log(err)

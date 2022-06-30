@@ -77,6 +77,7 @@ export default {
     data: function(){
         return {
             Listsupervisors: null,
+            Mensaje: null,
             form:{
                 "_id": "",
                 "dni": "",
@@ -97,10 +98,12 @@ export default {
             this.$http
             .put("/sellers/" + this.form._id, this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Vendedor actualizado. Por favor, actualizar la página") 
             })
             .catch(err => {
-                console.log(err)
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)  
             })
             this.$router.push("/vendedorview")
         },
@@ -112,7 +115,8 @@ export default {
             this.$http
             .put("/sellers/" + this.form._id + "/" + this.state)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Vendedor suspendido. Por favor, actualizar la página")
             })
             .catch(err => {
                 console.log(err)
@@ -124,7 +128,8 @@ export default {
             this.$http
             .put("/sellers/" + this.form._id + "/" + this.state)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Vendedor activo. Por favor, actualizar la página")
             })
             .catch(err => {
                 console.log(err)

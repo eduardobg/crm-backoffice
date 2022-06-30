@@ -72,7 +72,8 @@ export default {
     name: "AgregarClienteView",
     data: function(){
         return {     
-            Listsellers: null,             
+            Listsellers: null,   
+            Mensaje: null,          
             form:{
                 "name": "",
                 "lastName": "",
@@ -94,10 +95,12 @@ export default {
             this.$http
             .post("/customers",this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Cliente registrado. Por favor, actualizar la página")  
             })
             .catch(err => {
-                console.log(err)        
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)
             }) 
             this.$router.push("/dashboardview")
         },

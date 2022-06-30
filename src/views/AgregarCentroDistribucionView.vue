@@ -54,6 +54,7 @@ export default {
     },
     data: function(){
         return{
+            Mensaje: null,
             form:{
                 "name": "",
                 "address": "",
@@ -69,10 +70,12 @@ export default {
             this.$http
             .post("/distributions",this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Centro de distribución registrado. Por favor, actualizar la página")
             })
             .catch(err => {
-                console.log(err)        
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)          
             }) 
             this.$router.push("/centrodistribucionview")
         },
