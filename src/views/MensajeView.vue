@@ -21,7 +21,7 @@
                   <div class="row row-cols-2">
                     <div class="col-xl-4" v-for="campaignMessages in ListcampaignMessages" :key="campaignMessages._id">             
                       <div class="card">
-                        <h3>{{ "ID Mensaje: " + campaignMessages._id }}</h3>
+                        <h3>Mensaje</h3>
                         <h5>{{ "De: " + nombrevendedor(campaignMessages.id_seller) + NameSeller }}</h5>
                         <h5>{{ "Para: " + nombrecliente(campaignMessages.id_customer) + NameCustomer }}</h5>
                         <p>{{ campaignMessages.message }}</p>
@@ -45,7 +45,7 @@ export default {
           NameSeller: "",
           NameCustomer: "",
           ListcampaignMessages: null,
-          SearchId: "62a2dde82ed4f54907c521cc",
+          SearchId: "62bd1b9a4f6185ca3ea927fb",
           CantMessage: null
         }
     },

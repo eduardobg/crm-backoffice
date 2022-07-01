@@ -47,7 +47,7 @@
         <br>
         <div class="row">
             <div class="col">
-                <input type="button" value="Guardar" v-on:click="guardar()">
+                <input type="button" value="Enviar" v-on:click="guardar()">
                 <input type="button" value="Salir" v-on:click="salir()">
             </div>             
         </div>
@@ -62,6 +62,7 @@ export default {
     name: "EnviarMensajePersonalizado",
     data(){
         return{
+            Mensaje: null,
             search_seller: "",
             nombre: "",
             apellido: "",
@@ -83,10 +84,12 @@ export default {
             this.$http
             .post("/campaign",this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Mensaje Enviado. Por favor, actualizar la página") 
             })
             .catch(err => {
-                console.log(err)        
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)       
             }) 
             this.$router.push("/mensajeview")
         },

@@ -15,7 +15,7 @@
                     <div class="col-xl-4">
                         <label>Prioridad</label> 
                         <select type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
-                            <option value="">Selecionar prioridad</option>
+                            <option disabled value="">Selecionar prioridad</option>
                             <option>true</option>
                             <option>false</option>
                         </select>
@@ -79,7 +79,7 @@ export default {
                 ],  
                 "author": [
                     {
-                        "_id": "62913971c80def66431f641a"
+                        "_id": "62bd26c44f6185ca3ea9286f"
                     }
                 ],           
             }
