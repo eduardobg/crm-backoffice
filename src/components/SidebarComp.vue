@@ -39,19 +39,7 @@
           class="nav-list"
           style="overflow: visible;"
         >
-          <li
-            v-if="isSearch"
-            @click="isOpened = true"
-          >
-            <i class="bx bx-search" />
-            <input
-              type="text"
-              :placeholder="searchPlaceholder"
-              @input="$emit('search-input-emit', $event.target.value)"
-            >
-            <span class="tooltip">{{ searchTooltip }}</span>
-          </li>
-
+          
           <span
             v-for="(menuItem, index) in menuItems"
             :key="index"

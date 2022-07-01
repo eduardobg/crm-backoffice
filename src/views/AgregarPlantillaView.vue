@@ -31,7 +31,7 @@
                 <div class="row">                    
                     <div class="col-xl-4">
                         <label>Fecha de registro</label> 
-                        <input type="date" class="form-control" name="createat" id="createat" v-model="form.createAt">
+                        <input type="date" class="form-control" name="createat" id="createat" v-model="form.createAt" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Autor de campaña</label>                    
@@ -99,7 +99,23 @@ export default {
         },
         salir(){
             this.$router.push("/plantillaview")
-        }
+        },
+        printDate: function () {
+            var fecha = new Date()
+            var mes = fecha.getMonth()+1
+            var dia = fecha.getDate()
+            var ano = fecha.getFullYear()
+            if(dia<10){
+                dia='0'+dia
+            }
+            if(mes<10){
+                mes='0'+mes
+            }
+            return document.getElementById('createat').value=ano+"-"+mes+"-"+dia
+        },
+    },
+    mounted: function(){
+        this.form.createAt = this.printDate();
     }
 }
 </script>
