@@ -47,14 +47,15 @@ export default {
       this.$http
       .post('/auth/login', json)
       .then(data => {
-        const { msg } = data.data
-        if(msg === "Acceso concedido"){
+        const { statusText } = data
+        if(statusText === "OK"){
           this.$router.push('dashboardview')
         }
+        console.log(data)
       })
       .catch(err => {
         const { msg } = err.response.data
-        if(msg !== "Acceso concedido"){
+        if(msg !== "OK"){
           //console.log(msg)
           this.error = true
           this.mensaje = msg

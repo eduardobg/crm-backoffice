@@ -16,8 +16,9 @@
                         <label>Prioridad</label> 
                         <select type="text" class="form-control" name="prioridad" id="prioridad" v-model="form.priority">
                             <option disabled value="">Selecionar prioridad</option>
-                            <option>true</option>
-                            <option>false</option>
+                            <option v-for="option in options" :key="option.value" v-bind:value="option.value">
+                                {{ option.text }}
+                            </option>
                         </select>
                     </div>               
                 </div>
@@ -35,13 +36,13 @@
                     </div>
                     <div class="col-xl-4">
                         <label>Autor de campaña</label>                    
-                        <input type="text" class="form-control" name="autor" id="autor" v-model="form.author[0]._id" disabled>
+                        <input type="text" class="form-control" name="autor" id="autor" v-model="form.author" disabled>
                     </div>
                     <div class="col-xl-4">
                         <label>Centro de distribución</label> 
-                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion">
-                            <option selected>{{ form.ddcenter[0]._id="62913608faf2217807eec7e2" }}</option>
-                            <option>...</option>
+                        <select type="text" class="form-control" name="centrodistribucion" id="centrodistribucion" v-model="form.ddcenter">
+                            <option disabled value="">Seleccionar ID</option>
+                            <option v-for="distributions in Listdistributions" :key="distributions._id">{{ distributions._id }}</option>
                         </select>
                     </div>
                 </div>
@@ -67,22 +68,20 @@ export default {
     },
     data: function(){
         return{
+            Listdistributions: null,
+            Mensaje: null,
             form:{
                 "title": "",
                 "message": "",
                 "priority":"",
                 "createAt":"",
-                "ddcenter": [
-                    {
-                        "_id": ""
-                    }
-                ],  
-                "author": [
-                    {
-                        "_id": "62bd26c44f6185ca3ea9286f"
-                    }
-                ],           
-            }
+                "ddcenter": "",
+                "author": "62bd26c44f6185ca3ea9286f"
+            },
+            options: [
+                { text: "Alta", value: "true" },
+                { text: "Baja", value: "false" },
+            ]
         }
     },
     methods: {
@@ -90,10 +89,12 @@ export default {
             this.$http
             .post("/templates",this.form)
             .then(data => {
-                console.log(data)
+                this.Mensaje = data.statusText
+                alert(this.Mensaje + ". Plantilla registrada. Por favor, actualizar la página") 
             })
             .catch(err => {
-                console.log(err)        
+                this.Mensaje = err.response.data.errors[0].msg
+                alert(this.Mensaje)       
             }) 
             this.$router.push("/plantillaview")
         },
@@ -115,6 +116,10 @@ export default {
         },
     },
     mounted: function(){
+        this.$http
+        .get("/distributions").then(data => {
+            this.Listdistributions = data.data.distributions
+        })
         this.form.createAt = this.printDate();
     }
 }

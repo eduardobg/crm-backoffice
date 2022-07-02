@@ -18,7 +18,6 @@
           <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Nombre</th>
               <th scope="col">Dirección</th>
               <th scope="col">Distrito</th>
@@ -29,7 +28,6 @@
           </thead>
           <tbody>
             <tr v-for="distributions in Listdistributions" :key="distributions._id" v-on:click="editar(distributions._id)">
-              <td>{{ distributions._id }}</td>
               <td>{{ distributions.name }}</td>
               <td>{{ distributions.address }}</td>
               <td>{{ distributions.district }}</td>

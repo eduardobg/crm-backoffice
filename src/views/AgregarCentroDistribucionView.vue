@@ -10,26 +10,26 @@
             <div class="row">
                 <div class="col-xl-4">
                     <label>Nombre</label> 
-                    <input type="text" class="form-control" name="nombre" id="nombre" v-model="form.name">
+                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="ej. centro" v-model="form.name">
                 </div>
                 <div class="col-xl-4">
                     <label>Direccion</label> 
-                    <input type="text" class="form-control" name="direccion" id="direccion" v-model="form.address">
+                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="ej. Av Tacna 123" v-model="form.address">
                 </div>                                
             </div>
             <hr>                
             <div class="row">
                 <div class="col-xl-4">
                     <label>Distrito</label> 
-                    <input type="text" class="form-control" name="distrito" id="distrito" v-model="form.district" >
+                    <input type="text" class="form-control" name="distrito" id="distrito" placeholder="ej. SJL" v-model="form.district" >
                 </div>
                 <div class="col-xl-4">
                     <label>Provincia</label>  
-                    <input type="text" class="form-control" name="provincia" id="provincia" v-model="form.province" >
+                    <input type="text" class="form-control" name="provincia" id="provincia" placeholder="ej. Lima" v-model="form.province" >
                 </div>
                 <div class="col-xl-4">
                     <label>Departament</label> 
-                    <input type="text" class="form-control" name="departamento" id="departamento" v-model="form.department">
+                    <input type="text" class="form-control" name="departamento" id="departamento" placeholder="ej. Lima" v-model="form.department">
                 </div>
             </div>
         </form>
