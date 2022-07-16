@@ -73,14 +73,15 @@
           />
           <div class="name_job">
             <div class="name">
-              {{ profileName }}
+              {{ this.role }}
             </div>
             <div class="job">
-              {{ profileRole }}
+              {{ this.email }}
             </div>
           </div>
         </div>
         <i
+          type="submit"
           v-if="isExitButton"
           v-on:click="salir()"
           class="bx bx-log-out"
@@ -98,6 +99,9 @@ export default {
     methods: {
       salir(){
         this.$router.push('/')
+        sessionStorage.removeItem('email')
+        sessionStorage.removeItem('rol')
+        sessionStorage.removeItem('data')
       }
     },
     props: {
@@ -200,15 +204,7 @@ export default {
       //! Profile detailes
       profileImg: {
         type: String,
-        default: require('../assets/img/photo.jpg'),
-      },
-      profileName: {
-        type: String,
-        default: 'Gerente del Sistema',
-      },
-      profileRole: {
-        type: String,
-        default: 'admin@gmail.com',
+        default: require('../assets/img/'+'photo.jpg'),
       },
       isExitButton: {
         type: Boolean,
@@ -258,11 +254,16 @@ export default {
     },
     data() {
       return {
-        isOpened: false
+        isOpened: false,
+        role: '',
+        email: '',
+        img: ''
       }
     },
     mounted() {
-      this.isOpened = this.isMenuOpen
+      this.isOpened = this.isMenuOpen,
+      this.role = sessionStorage.getItem('rol') + ' del sistema'
+      this.email = sessionStorage.getItem('email')
     },
     computed: {
       cssVars() {

@@ -6,18 +6,27 @@
         <div class="fadeIn first">
         <img src="@/assets/logo.png" id="icon" alt="User Icon" />
         </div>
-        <!-- Formulario Login -->
-        <form v-on:submit.prevent="login">
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="Usuario" v-model="usuario" required>
-          <input type="password" id="password" class="fadeIn third" name="login" placeholder="Contraseña" v-model="contraseña" required>
-          <input type="submit" class="fadeIn fourth" value="Ingresar">
+        <!-- Formulario Validacion -->
+        <form v-on:submit.prevent="validar" v-if="this.validacion">
+          <p class="fadeIn second">Ingresa tu usuario y número de teléfono</p>
+          <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="Usuario" v-model="usuario" required>
+          <input type="text" id="telefono" class="fadeIn third" name="telefono" placeholder="Teléfono" v-model="telefono" required>
+          <input type="submit" class="fadeIn fourth" value="Validar identidad">
         </form>
-        <!-- Recordar contraseña -->
+        <!-- Formulario Validacion -->
+        <form v-on:submit.prevent="actualizar" v-if="this.actualizacion">
+          <p class="fadeIn second">Ingresa tu código de verificación y la nueva contraseña</p>
+          <input type="text" id="codigo" class="fadeIn second" name="codigo" placeholder="Código de verificación" v-model="codigo" required>
+          <input type="password" id="passwordnew" class="fadeIn third" name="passwordnew" placeholder="Nueva contraseña" v-model="contraseñanew" required>
+          <input type="password" id="passwordnew2" class="fadeIn third" name="passwordnew2" placeholder="Repetir contraseña" v-model="contraseñanew2" required>
+          <input type="submit" class="fadeIn fourth" value="Cambiar contraseña">
+        </form>
+        <!-- Volver a login -->
         <div class="alert alert-danger" role="alert" v-if="error">
           <a>{{ mensaje }}</a>
         </div>
         <div id="formFooter">
-          <a type="submit" class="underlineHover" v-on:click="actualizarcontraseña()" >¿Olvidaste tu contraseña?</a>
+          <a type="submit" class="underlineHover" v-on:click="salir()" >Regresar al inicio</a>
         </div>
       </div>
     </div>
@@ -26,69 +35,77 @@
 
 <script>
 export default {
-  name: 'HomeView',
-  components: {
+    name: 'ActualizarContraseñaView',
+    components: {
 
-  },
-  data: function() {
-    return {
-      usuario: "",
-      contraseña: "",
-      error: false,
-      mensaje: "",
-      //propiedades a enviar en el sidebar   
-      role: null,
-      email: null,
-    }
-  },
-  methods: {
-    login(){
-      let json = {
-        "email": this.usuario,
-        "password": this.contraseña
-      };
-      this.$http
-      .post('/auth/login', json)
-      .then(data => {
-        const { statusText } = data
-        if(statusText === "OK"){
-          this.$router.push('dashboardview')
-          this.role = data.data.role
-          console.log(this.role)
-          if(this.role === "Supervisor"){
-            this.email = data.data.supervisor.email
-            sessionStorage.setItem('rol',this.role)
-            sessionStorage.setItem('email',this.email)
-            sessionStorage.setItem('data',JSON.stringify(data.data.supervisor))
-          }
-          if(this.role === "Vendedor"){
-            this.email = data.data.seller.email
-            sessionStorage.setItem('rol',this.role)
-            sessionStorage.setItem('email',this.email)
-            sessionStorage.setItem('data',JSON.stringify(data.data.seller))
-          }
-          if(this.role === "Manager"){
-            this.email = "admin@gmail.com"
-            sessionStorage.setItem('rol',this.role)
-            sessionStorage.setItem('email',this.email)
-          }
-        }
-      })
-      .catch(err => {
-        const { msg } = err.response.data
-        if(msg !== "OK"){
-          //console.log(msg)
-          this.error = true
-          this.mensaje = msg
-        }
-      })
     },
-    actualizarcontraseña(){
-      this.$router.push('actualizarcontraseñaview')
+    data: function() {
+        return {
+            usuario: "",
+            telefono: "",
+            error: false,
+            validacion: true,
+            actualizacion: false,
+            mensaje: "",
+            id: "",
+            codigo: "",
+            codigoverificacion: "",
+            contraseñanew: "",
+            contraseñanew2: "",
+        }
+    },
+    methods: {
+        validar(){
+            let json = {
+               "email": this.usuario,
+               "phone": this.telefono
+            };
+            this.$http
+            .post('/password/first',json)
+            .then(data => {
+                this.id = data.data.seller._id
+                this.mensaje = data.data.msg
+                alert(this.mensaje)
+                this.validacion = false
+                this.actualizacion = true
+                this.error = false
+                this.codigoverificacion = data.data.code
+            })
+            .catch(err => {
+                const { msg } = err.response.data
+                if( msg !== "OK"){
+                    this.error = true
+                    this.mensaje = msg
+                }
+            })
+        },
+        actualizar(){
+            if(this.codigo==this.codigoverificacion && this.contraseñanew==this.contraseñanew2){
+                this.error = false
+                let json = {
+                    "password": this.contraseñanew
+                }
+                this.$http
+                .put('/password/change/'+this.id, json)
+                .then(data => {
+                    this.mensaje = data.data.msg
+                    alert(this.mensaje)
+                    this.$router.push('/')
+                })
+            }
+            if (this.codigo!=this.codigoverificacion){
+                this.error = true
+                this.mensaje = "Codigo de verificación incorrecto"
+            }else if (this.contraseñanew!=this.contraseñanew2){
+                this.error = true
+                this.mensaje = "Validación de contraseñas incorrecta"
+            }
+        },
+        salir(){
+            this.$router.push('/')
+        }
     }
-  }
 }
-
 </script>
 
 <style scoped>
@@ -162,8 +179,6 @@ img {
   border-radius: 0 0 10px 10px;
 }
 
-
-
 /* TABS */
 
 h2.inactive {
@@ -175,12 +190,10 @@ h2.active {
   border-bottom: 2px solid #5fbae9;
 }
 
-
-
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #1D8A6B;
+  background-color: #F4873E;
   border: none;
   color: white;
   padding: 15px 80px;
@@ -202,7 +215,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #0B4C3C;
+  background-color: #c46d34;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -242,8 +255,6 @@ input[type=text]:focus, input[type=password]:focus {
 input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
-
-
 
 /* ANIMATIONS */
 
@@ -346,8 +357,6 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 .underlineHover:hover:after{
   width: 100%;
 }
-
-
 
 /* OTHERS */
 

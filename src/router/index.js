@@ -26,6 +26,10 @@ import CentroDistribucionView from '../views/CentroDistribucionView.vue'
 import EditarCentroDistribucionView from '../views/EditarCentroDistribucionView.vue'
 import AgregarCentroDistribucionView from '../views/AgregarCentroDistribucionView.vue'
 
+import ActualizarContraseñaView from '../views/ActualizarContraseñaView.vue'
+
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -123,6 +127,11 @@ const routes = [
     path: '/agregarcentrodistribucionview',
     name: 'AgregarCentroDistribucionView',
     component: AgregarCentroDistribucionView
+  },
+  {
+    path: '/actualizarcontraseñaview',
+    name: 'ActualizarContraseñaView',
+    component: ActualizarContraseñaView
   },
 ]
 
