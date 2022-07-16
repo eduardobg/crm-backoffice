@@ -32,7 +32,7 @@
             <input type="text" class="form-control" name="provincia" id="provincia" v-model="form.province" >
           </div>
           <div class="col-xl-4">
-            <label>Departament</label> 
+            <label>Departamento</label> 
             <input type="text" class="form-control" name="departamento" id="departamento" v-model="form.department">
           </div>
         </div>

@@ -28,7 +28,7 @@ import AgregarCentroDistribucionView from '../views/AgregarCentroDistribucionVie
 
 import ActualizarContraseñaView from '../views/ActualizarContraseñaView.vue'
 
-
+import PerfilView from '../views/PerfilView.vue'
 
 Vue.use(VueRouter)
 
@@ -132,6 +132,11 @@ const routes = [
     path: '/actualizarcontraseñaview',
     name: 'ActualizarContraseñaView',
     component: ActualizarContraseñaView
+  },
+  {
+    path: '/perfilview',
+    name: 'PerfilView',
+    component: PerfilView
   },
 ]
 

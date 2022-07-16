@@ -139,7 +139,7 @@ export default {
         type: Array,
         default: () => [  
           {
-            link: '#',
+            link: '/perfilview',
             name: 'Mi perfil',
             tooltip: 'Perfil',
             icon: 'bx-user-circle',
