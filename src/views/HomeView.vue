@@ -39,6 +39,18 @@ export default {
       //propiedades a enviar en el sidebar   
       role: null,
       email: null,
+      //JSON para el admin
+      form:{
+          "_id": "10ad1m010i0101n00011sys0",
+          "dni": "71155117",
+          "name": "Admin",
+          "lastName": "System",
+          "role": "manager",
+          "phone": "999111999",
+          "email": "admin@gmail.com",
+          "createAt": "",
+          "state": ""       
+      }
     }
   },
   methods: {
@@ -54,7 +66,6 @@ export default {
         if(statusText === "OK"){
           this.$router.push('dashboardview')
           this.role = data.data.role
-          console.log(this.role)
           if(this.role === "Supervisor"){
             this.email = data.data.supervisor.email
             sessionStorage.setItem('rol',this.role)
@@ -71,6 +82,7 @@ export default {
             this.email = "admin@gmail.com"
             sessionStorage.setItem('rol',this.role)
             sessionStorage.setItem('email',this.email)
+            sessionStorage.setItem('data',JSON.stringify(this.form))
           }
         }
       })

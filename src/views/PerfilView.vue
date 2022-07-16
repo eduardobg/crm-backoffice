@@ -40,20 +40,22 @@
                     <input type="text" class="form-control" name="email" id="email" v-model="email" disabled>
                 </div>
             </div>
-            <hr>  
-            <div class="row">  
-                <div class="col-xl-4">
-                    <label>Fecha de registro</label> 
-                    <input type="date" class="form-control" name="createat" id="createat" v-model="createAt" disabled>
-                </div> 
-                <div class="col-xl-4">
-                    <label>{{(this.role=="vendedor")?'Supervisor':'Centro de distribución'}} asignado</label>                    
-                    <input type="text" v-if="inputsupervisor" class="form-control" name="supervisor" id="supervisor" v-model="supervisor" disabled>
-                    <input type="text" v-if="inputddcenter" class="form-control" name="ddcenter" id="ddcenter" v-model="ddcenter" disabled>
-                </div>                 
-                <div class="col-xl-4">
-                    <label>Estado</label>  
-                    <input type="text" class="form-control" name="state" id="state" v-model="state" disabled>
+            <div v-if="usuario">
+                <hr>  
+                <div class="row">  
+                    <div class="col-xl-4">
+                        <label>Fecha de registro</label> 
+                        <input type="date" class="form-control" name="createat" id="createat" v-model="createAt" disabled>
+                    </div> 
+                    <div class="col-xl-4">
+                        <label>{{(this.role=="vendedor")?'Supervisor':'Centro de distribución'}} asignado</label>                    
+                        <input type="text" v-if="inputsupervisor" class="form-control" name="supervisor" id="supervisor" v-model="supervisor" disabled>
+                        <input type="text" v-if="inputddcenter" class="form-control" name="ddcenter" id="ddcenter" v-model="ddcenter" disabled>
+                    </div>                 
+                    <div class="col-xl-4">
+                        <label>Estado</label>  
+                        <input type="text" class="form-control" name="state" id="state" v-model="state" disabled>
+                    </div>
                 </div>
             </div>
         </form>
@@ -87,6 +89,8 @@ export default {
             "ddcenter": "",
             "inputsupervisor": false,
             "inputddcenter": false,
+            //Validar usuario
+            "usuario": true
         }
     },
     mounted: function(){
@@ -107,6 +111,9 @@ export default {
         if(this.role=="supervisor"){
             this.ddcenter = this.info.ddcenter
             this.inputddcenter = true
+        }
+        if(this.role=="manager"){
+            this.usuario = false
         }
     }
 }
