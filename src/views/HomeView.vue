@@ -41,7 +41,7 @@ export default {
       email: null,
       //JSON para el admin
       form:{
-          "_id": "10ad1m010i0101n00011sys0",
+          "_id": "62bb5a280a4218f00036bcae",
           "dni": "71155117",
           "name": "Admin",
           "lastName": "System",

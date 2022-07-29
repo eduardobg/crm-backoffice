@@ -68,6 +68,7 @@ export default {
     },
     data: function(){
         return{
+            info: null,
             Listdistributions: null,
             Mensaje: null,
             form:{
@@ -76,7 +77,7 @@ export default {
                 "priority":"",
                 "createAt":"",
                 "ddcenter": "",
-                "author": "62bd26c44f6185ca3ea9286f"
+                "author": ""
             },
             options: [
                 { text: "Alta", value: "true" },
@@ -121,6 +122,9 @@ export default {
             this.Listdistributions = data.data.distributions
         })
         this.form.createAt = this.printDate();
+
+        this.info = JSON.parse(sessionStorage.data)
+        this.form.author = this.info._id
     }
 }
 </script>

@@ -181,7 +181,13 @@ export default {
             icon: 'bx-line-chart',
           },
           {
-            link: '#',
+            link: '/mensajegrupoview',
+            name: 'Mi equipo',
+            tooltip: 'Equipo',
+            icon: 'bx-message-dots',
+          },
+          {
+            link: '/listarrolesview',
             name: 'Configuración',
             tooltip: 'Configuración',
             icon: 'bx-cog',

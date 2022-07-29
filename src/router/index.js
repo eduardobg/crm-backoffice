@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import HomeView from '../views/HomeView.vue'
+import ActualizarContraseñaView from '../views/ActualizarContraseñaView.vue'
 
 import DashboardView from '../views/DashboardView.vue'
 import EditarClienteView from '../views/EditarClienteView.vue'
@@ -17,6 +19,7 @@ import AgregarPlantillaView from '../views/AgregarPlantillaView.vue'
 import MensajeView from '../views/MensajeView.vue'
 import EnviarMensajePersonalizado from '../views/EnviarMensajePersonalizado.vue'
 import EnviarMensajePlantilla from '../views/EnviarMensajePlantilla.vue'
+import MensajeGrupoView from '../views/MensajeGrupoView.vue'
 
 import SupervisorView from '../views/SupervisorView.vue'
 import EditarSupervisorView from '../views/EditarSupervisorView.vue'
@@ -26,9 +29,8 @@ import CentroDistribucionView from '../views/CentroDistribucionView.vue'
 import EditarCentroDistribucionView from '../views/EditarCentroDistribucionView.vue'
 import AgregarCentroDistribucionView from '../views/AgregarCentroDistribucionView.vue'
 
-import ActualizarContraseñaView from '../views/ActualizarContraseñaView.vue'
-
 import PerfilView from '../views/PerfilView.vue'
+import ListarRolesView from '../views/ListarRolesView.vue'
 
 Vue.use(VueRouter)
 
@@ -137,6 +139,16 @@ const routes = [
     path: '/perfilview',
     name: 'PerfilView',
     component: PerfilView
+  },
+  {
+    path: '/listarrolesview',
+    name: 'ListarRolesView',
+    component: ListarRolesView
+  },
+  {
+    path: '/mensajegrupoview',
+    name: 'MensajeGrupoView',
+    component: MensajeGrupoView
   },
 ]
 
