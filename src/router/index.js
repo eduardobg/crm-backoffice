@@ -30,7 +30,10 @@ import EditarCentroDistribucionView from '../views/EditarCentroDistribucionView.
 import AgregarCentroDistribucionView from '../views/AgregarCentroDistribucionView.vue'
 
 import PerfilView from '../views/PerfilView.vue'
+
+import ConfiguracionView from '../views/ConfiguracionView.vue'
 import ListarRolesView from '../views/ListarRolesView.vue'
+import ReporteClientesView from '../views/ReporteClientesView.vue'
 
 Vue.use(VueRouter)
 
@@ -149,6 +152,16 @@ const routes = [
     path: '/mensajegrupoview',
     name: 'MensajeGrupoView',
     component: MensajeGrupoView
+  },
+  {
+    path: '/reporteclientesview',
+    name: 'ReporteClientesView',
+    component: ReporteClientesView
+  },
+  {
+    path: '/configuracionview',
+    name: 'ConfiguracionView',
+    component: ConfiguracionView
   },
 ]
 

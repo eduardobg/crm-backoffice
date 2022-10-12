@@ -187,7 +187,7 @@ export default {
             icon: 'bx-message-dots',
           },
           {
-            link: '/listarrolesview',
+            link: '/configuracionview',
             name: 'Configuración',
             tooltip: 'Configuración',
             icon: 'bx-cog',
