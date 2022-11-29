@@ -7,8 +7,7 @@
         </div>
         <div class="row">
             <input type="submit" value="Lista de roles en el sistema" v-on:click="listar()">
-            <input type="submit" value="Reporte de estado del cliente" v-on:click="reportcliente()">   
-            <input type="submit" value="Reporte de comunicación" v-on:click="reportcomunicacion()">
+            <input type="submit" value="Reporte del sistema" v-on:click="reportcliente()">   
         </div>
     </div>
   </div>
@@ -28,9 +27,6 @@ export default {
         },
         reportcliente(){
             this.$router.push("/reporteclientesview")
-        },
-        reportcomunicacion(){
-            console.log("En proceso...")
         },
     }
 }

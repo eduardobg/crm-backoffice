@@ -3,10 +3,29 @@
     <SidebarMenuAkahon /> 
     <div class="container izquierda">
         <div class="row">
-          <h1>Reporte - Estado de los clientes</h1>
+          <h1>Reporte - Estado del sistema CRM</h1>
         </div>
-        <div class="ApexChar" id="chart">
-          <ApexchartComp type="pie" width="800" :options="chartOptions" :series="series"></ApexchartComp>
+        <div class="row">
+            <div class="col">
+            <h3>Estado de los clientes</h3>
+            <div class="ApexChar" id="chart">
+              <ApexchartComp type="pie" width="535" :options="chartOptions" :series="series"></ApexchartComp>
+            </div>
+          </div>
+          <div class="col">
+            <h3>Mensajes enviados por Sedes</h3>
+            <div class="ApexChar" id="chart">
+              <ApexchartComp type="bar" height="350" :options="chartOptions1" :series="series1"></ApexchartComp>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h3>Mensajes enviados por vendedor</h3>
+            <div class="ApexCharSpecial" id="chart">
+              <ApexchartComp type="bar" height="340" :options="chartOptions2" :series="series2"></ApexchartComp>
+            </div>
+          </div>
         </div>
     </div>
   </div>
@@ -14,30 +33,69 @@
 
 <script>
 import SidebarMenuAkahon from '@/components/SidebarComp.vue'
-
+import axios from 'axios'
 export default {
     name: "ReporteClientesView",
     data(){
-        return{            
+        return{     
+            ApiDcenter: 'https://8si8d6ofyh.execute-api.us-east-1.amazonaws.com/dev/api/metrics/message/bars/dcenter/',
+            ApiSeller: 'https://8si8d6ofyh.execute-api.us-east-1.amazonaws.com/dev/api/metrics/message/columns/seller/',
+            
             series: [],
             chartOptions: {
               chart: {
-                width: 800,
+                width: 535,
                 type: 'pie',
               },
-            labels: ['Activo','Suspendido'],
-            responsive: [{
-              breakpoint: 801,
-              options: {
-                chart: {
-                  width: 500
-                },
-                legend: {
-                  position: 'right'
+              labels: [],
+            },
+
+            series1: [{
+              data: []
+            }], 
+            chartOptions1: {
+              chart: {
+                type: 'bar',
+                height: 350
+              },
+              plotOptions: {
+                bar: {
+                  borderRadius: 4,
+                  horizontal: true,
                 }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              xaxis: {
+                categories: [],
               }
-            }]
-          },
+            },
+
+            series2: [{
+              data: []
+            }],
+            chartOptions2: {
+              chart: {
+                height: 350,
+                type: 'bar',
+              },
+              plotOptions: {
+                bar: {
+                  columnWidth: '45%',
+                  distributed: true,
+                }
+              },
+              dataLabels: {
+                enabled: false
+              },
+              legend: {
+                show: false
+              },
+              xaxis: {
+                categories: [],
+              }
+            },
 
         }
     },
@@ -45,9 +103,35 @@ export default {
         SidebarMenuAkahon,
     },
     mounted: function(){
+        
         this.$http
         .get("/metrics/customer/pastel/status/").then(data => {
             this.series = data.data.series
+            this.chartOptions = ({
+              labels: data.data.label
+            })
+        })
+
+        axios.get(this.ApiDcenter).then(data => {
+            this.series1 = [{
+              data: data.data.data
+            }] 
+            this.chartOptions1 = ({
+              xaxis: {
+                categories: data.data.categories
+              }
+            })
+        })
+
+        axios.get(this.ApiSeller).then(data => {
+            this.series2 = [{
+              data: data.data.data
+            }] 
+            this.chartOptions2 = ({
+              xaxis: {
+                categories: data.data.categories
+              }
+            })
         })
     }
 }
@@ -97,11 +181,6 @@ export default {
     text-align: left;
   }
 
-  .especial{
-    text-align: right;
-  }
-
-
   h1 {
     text-align: left;
     font-size: 46px;
@@ -112,6 +191,15 @@ export default {
     color: #0B4C3C;
   }
 
+  h3 {
+    text-align: left;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 40px 8px 10px 8px; 
+    text-transform: uppercase;
+    color: #1D8A6B;
+  }
+
   .ApexChar{
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -119,6 +207,22 @@ export default {
     text-transform: uppercase;
     padding: 20px;
     max-width: 850px;
+    min-width: 520px;
+    position: relative;
+    margin: auto;
+    margin-top: 25px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: left;
+  }
+
+  .ApexCharSpecial{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    text-transform: uppercase;
+    padding: 20px;
+    max-width: 1530px;
     min-width: 520px;
     position: relative;
     margin: auto;
